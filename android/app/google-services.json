@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "196504032011",
+    "project_id": "petmarket-bo-app",
+    "storage_bucket": "petmarket-bo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196504032011:android:e8068f7d2f8985edf2080e",
+        "android_client_info": {
+          "package_name": "com.example.petmarket_bo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196504032011-0c2bo529l925lonm8nli2n2t88r2p3r6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_jywecTfwksAwvqvVIUpAvS2NhoFukzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196504032011-0c2bo529l925lonm8nli2n2t88r2p3r6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
