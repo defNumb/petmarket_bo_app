@@ -18,6 +18,7 @@ class AuthRepository {
   // Sign up method
   Future<void> signup({
     required String name,
+    required String lastName,
     required String email,
     required String password,
   }) async {
@@ -32,6 +33,7 @@ class AuthRepository {
 
       await usersRef.doc(signedInUser.uid).set({
         'name': name,
+        'last_name': lastName,
         'email': email,
         'point': 0,
         'rank': 'Bronze',

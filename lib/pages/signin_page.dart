@@ -157,21 +157,18 @@ class _SigninPageState extends State<SigninPage> {
                                   color: fontColor,
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  state.signinStatus == SigninStatus.submitting
-                                      ? null
-                                      : () {
-                                          Navigator.pushNamed(context, SignupPage.routeName);
-                                        };
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, SignupPage.routeName);
                                 },
                                 child: const Text(
-                                  ' REGISTRATE AHORA',
+                                  'REGISTRATE AHORA',
                                   style: TextStyle(
                                     fontFamily: fontType,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: fontColor,
+                                    decoration: TextDecoration.underline,
                                   ),
                                 ),
                               ),
