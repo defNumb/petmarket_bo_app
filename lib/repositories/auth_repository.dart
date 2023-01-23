@@ -23,6 +23,7 @@ class AuthRepository {
     required String password,
   }) async {
     try {
+      // Create user in firebase auth
       final fbAuth.UserCredential userCredential =
           await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -31,15 +32,19 @@ class AuthRepository {
 
       final signedInUser = userCredential.user!;
 
+      // Create user in firestore AFTER user is created in firebase auth
       await usersRef.doc(signedInUser.uid).set({
+        'id': signedInUser.uid,
         'name': name,
         'last_name': lastName,
         'email': email,
         'point': 0,
         'rank': 'Bronze',
-        'dateJoined': DateTime.now(),
+        'phoneNumber': '',
+        'dateJoined': DateTime.now().toString(),
       });
     } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
       throw CustomError(
         code: e.code,
         message: e.message!,

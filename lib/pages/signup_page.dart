@@ -53,6 +53,11 @@ class _SignupPageState extends State<SignupPage> {
         builder: (context, state) {
           return Scaffold(
             backgroundColor: primaryColor,
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: primaryColor,
+              elevation: 2.0,
+            ),
             body: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -227,6 +232,7 @@ class _SignupPageState extends State<SignupPage> {
                                 Navigator.of(context).pop();
                               },
                         style: TextButton.styleFrom(
+                          foregroundColor: Color.fromARGB(255, 211, 189, 146),
                           textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 14.0,

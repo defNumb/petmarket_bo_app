@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
+import 'package:petmarket_bo_app/blocs/profile/profile_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
 import 'package:petmarket_bo_app/pages/home_page.dart';
@@ -11,6 +12,7 @@ import 'package:petmarket_bo_app/pages/signin_page.dart';
 import 'package:petmarket_bo_app/pages/signup_page.dart';
 import 'package:petmarket_bo_app/pages/splash_page.dart';
 import 'package:petmarket_bo_app/repositories/auth_repository.dart';
+import 'package:petmarket_bo_app/repositories/profile_repository.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -34,7 +36,12 @@ class MyApp extends StatelessWidget {
             firebaseFirestore: FirebaseFirestore.instance,
             firebaseAuth: FirebaseAuth.instance,
           ),
-        )
+        ),
+        RepositoryProvider<ProfileRepository>(
+          create: (context) => ProfileRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -52,7 +59,12 @@ class MyApp extends StatelessWidget {
             create: (context) => SignupCubit(
               authRepository: context.read<AuthRepository>(),
             ),
-          )
+          ),
+          BlocProvider<ProfileCubit>(
+            create: (context) => ProfileCubit(
+              profileRepository: context.read<ProfileRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Pet Market App',

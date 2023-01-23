@@ -30,13 +30,13 @@ class User extends Equatable {
 
     return User(
       id: userDoc.id,
-      name: userData!['name'],
-      lastName: userData['lastName'],
-      email: userData['email'],
-      point: userData['point'],
-      rank: userData['rank'],
-      phoneNumber: userData['phoneNumber'],
-      dateJoined: userData['dateJoined'],
+      name: userData!['name'] ?? '',
+      lastName: userData['lastName'] ?? '',
+      email: userData['email'] ?? '',
+      point: userData['point'] ?? 0,
+      rank: userData['rank'] ?? '',
+      phoneNumber: userData['phoneNumber'] ?? '',
+      dateJoined: userData['dateJoined'] ?? '',
     );
   }
 
