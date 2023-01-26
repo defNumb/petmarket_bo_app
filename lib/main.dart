@@ -4,14 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
+import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
+import 'package:petmarket_bo_app/blocs/pet_profile/pet_profile_cubit.dart';
 import 'package:petmarket_bo_app/blocs/profile/profile_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
+import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
 import 'package:petmarket_bo_app/pages/home_page.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
 import 'package:petmarket_bo_app/pages/signin_page.dart';
 import 'package:petmarket_bo_app/pages/signup_page.dart';
 import 'package:petmarket_bo_app/pages/splash_page.dart';
+import 'package:petmarket_bo_app/pages/widgets/pet_profile_widgets/add_pet.dart';
 import 'package:petmarket_bo_app/repositories/auth_repository.dart';
+import 'package:petmarket_bo_app/repositories/pet_repository.dart';
 import 'package:petmarket_bo_app/repositories/profile_repository.dart';
 import 'firebase_options.dart';
 
@@ -42,6 +48,11 @@ class MyApp extends StatelessWidget {
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         ),
+        RepositoryProvider<PetRepository>(
+          create: (context) => PetRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        )
       ],
       child: MultiBlocProvider(
         providers: [
@@ -65,6 +76,22 @@ class MyApp extends StatelessWidget {
               profileRepository: context.read<ProfileRepository>(),
             ),
           ),
+          BlocProvider<PetProfileCubit>(
+            create: (context) => PetProfileCubit(
+              petRepository: context.read<PetRepository>(),
+              profileRepository: context.read<ProfileRepository>(),
+            ),
+          ),
+          BlocProvider<PetListCubit>(
+            create: (context) => PetListCubit(
+              petRepository: context.read<PetRepository>(),
+            ),
+          ),
+          BlocProvider<SignupPetCubit>(
+            create: (context) => SignupPetCubit(
+              petRepository: context.read<PetRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Pet Market App',
@@ -77,6 +104,8 @@ class MyApp extends StatelessWidget {
             SignupPage.routeName: (context) => SignupPage(),
             SigninPage.routeName: (context) => SigninPage(),
             HomePage.routeName: (context) => HomePage(),
+            MyPetsScreen.routeName: (context) => MyPetsScreen(),
+            RegisterPetScreen.routeName: (context) => RegisterPetScreen(),
           },
         ),
       ),

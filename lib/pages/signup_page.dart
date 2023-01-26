@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
-import 'package:petmarket_bo_app/constants/db_constant.dart';
 import 'package:petmarket_bo_app/utils/error_dialog.dart';
 import 'package:validators/validators.dart';
+
+import '../constants/app_constants.dart';
 
 class SignupPage extends StatefulWidget {
   static const String routeName = '/signup';

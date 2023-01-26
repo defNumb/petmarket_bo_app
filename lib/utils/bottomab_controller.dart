@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/discover.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/menu.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/profile.dart';
+import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/shop.dart';
 
 class BottomNavigationBarController extends StatefulWidget {
   const BottomNavigationBarController({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class BottomNavigationBarController extends StatefulWidget {
 class _BottomNavigationBarControllerState extends State<BottomNavigationBarController> {
   final List<Widget> pages = [
     const DiscoverPage(),
-    const Text('Hola'),
+    const ShopPage(),
     const Text('Hola'),
     const UserProfile(),
     const MenuPage(),
