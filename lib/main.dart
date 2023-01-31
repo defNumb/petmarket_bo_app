@@ -20,8 +20,10 @@ import 'package:petmarket_bo_app/repositories/auth_repository.dart';
 import 'package:petmarket_bo_app/repositories/pet_repository.dart';
 import 'package:petmarket_bo_app/repositories/product_repository.dart';
 import 'package:petmarket_bo_app/repositories/profile_repository.dart';
+import 'blocs/product_description/product_description_cubit.dart';
 import 'blocs/product_list/product_list_cubit.dart';
 import 'firebase_options.dart';
+import 'pages/product_pages/products_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -103,7 +105,12 @@ class MyApp extends StatelessWidget {
             create: (context) => ProductListCubit(
               productRepository: context.read<ProductRepository>(),
             ),
-          )
+          ),
+          BlocProvider<ProductDescriptionCubit>(
+            create: (context) => ProductDescriptionCubit(
+              productRepository: context.read<ProductRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Pet Market App',
@@ -118,6 +125,7 @@ class MyApp extends StatelessWidget {
             HomePage.routeName: (context) => HomePage(),
             MyPetsScreen.routeName: (context) => MyPetsScreen(),
             RegisterPetScreen.routeName: (context) => RegisterPetScreen(),
+            ProductsPage.routeName: (context) => ProductsPage(),
           },
         ),
       ),
