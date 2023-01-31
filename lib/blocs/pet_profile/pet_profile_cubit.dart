@@ -37,4 +37,25 @@ class PetProfileCubit extends Cubit<PetState> {
       );
     }
   }
+
+  // Delete pet profile
+  Future<void> deletePetProfile({required String uid, required String pid}) async {
+    emit(state.copyWith(profileStatus: ProfileStatus.loading));
+
+    try {
+      await petRepository.deletePet(uid: uid, pid: pid);
+      emit(
+        state.copyWith(
+          profileStatus: ProfileStatus.deleted,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          profileStatus: ProfileStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }

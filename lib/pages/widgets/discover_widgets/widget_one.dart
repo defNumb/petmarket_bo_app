@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petmarket_bo_app/pages/product_pages/products_page.dart';
 
 class WidgetOne extends StatefulWidget {
   const WidgetOne({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _WidgetOneState extends State<WidgetOne> {
     const CardCategory(
       urlImage: 'assets/images/testdog1.png',
       title: 'Perros',
-      link: Text('Hola'),
+      link: ProductsPage(),
     ),
     const CardCategory(
       urlImage: 'assets/images/testcat1.png',

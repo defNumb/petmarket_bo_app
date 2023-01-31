@@ -6,6 +6,7 @@ enum ProfileStatus {
   loading,
   loaded,
   error,
+  deleted,
 }
 
 class PetState extends Equatable {

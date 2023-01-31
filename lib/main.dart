@@ -18,7 +18,9 @@ import 'package:petmarket_bo_app/pages/splash_page.dart';
 import 'package:petmarket_bo_app/pages/widgets/pet_profile_widgets/add_pet.dart';
 import 'package:petmarket_bo_app/repositories/auth_repository.dart';
 import 'package:petmarket_bo_app/repositories/pet_repository.dart';
+import 'package:petmarket_bo_app/repositories/product_repository.dart';
 import 'package:petmarket_bo_app/repositories/profile_repository.dart';
+import 'blocs/product_list/product_list_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -50,6 +52,11 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<PetRepository>(
           create: (context) => PetRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
+        RepositoryProvider<ProductRepository>(
+          create: (context) => ProductRepository(
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         )
@@ -92,6 +99,11 @@ class MyApp extends StatelessWidget {
               petRepository: context.read<PetRepository>(),
             ),
           ),
+          BlocProvider<ProductListCubit>(
+            create: (context) => ProductListCubit(
+              productRepository: context.read<ProductRepository>(),
+            ),
+          )
         ],
         child: MaterialApp(
           title: 'Pet Market App',

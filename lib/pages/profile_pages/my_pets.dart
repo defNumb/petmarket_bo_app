@@ -5,6 +5,7 @@ import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
 import 'package:petmarket_bo_app/models/pet_model.dart';
 import 'package:petmarket_bo_app/utils/error_dialog.dart';
 
+import '../../blocs/pet_profile/pet_profile_cubit.dart';
 import '../../constants/app_constants.dart';
 
 class MyPetsScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class MyPetsScreen extends StatefulWidget {
 class _MyPetsScreenState extends State<MyPetsScreen> {
   // VARIABLES
   Image backgroundImage = Image.asset('assets/images/wallpaper.png');
-  late List<Pet> petList = [];
 
   @override
   void initState() {
@@ -28,7 +28,8 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
 
   void _getPetList() async {
     final String uid = context.read<AuthBloc>().state.user!.uid;
-    petList = await context.read<PetListCubit>().getPetList(uid: uid);
+    await context.read<PetListCubit>().getPetList(uid: uid);
+    // context.read<PetListCubit>().state.petList;
   }
 
   @override
@@ -73,6 +74,7 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
       ),
       body: BlocConsumer<PetListCubit, PetListState>(
         listener: (context, state) {
+          print(state.listStatus);
           if (state.listStatus == PetListStatus.error) {
             errorDialog(context, state.error);
           }
@@ -84,7 +86,7 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state.listStatus == PetListStatus.loaded && petList.isEmpty) {
+          } else if (state.listStatus == PetListStatus.loaded && state.petList.isEmpty) {
             return noPets();
           } else if (state.listStatus == PetListStatus.error) {
             return Center(
@@ -93,11 +95,13 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
               ),
             );
           }
-          print(state.listStatus);
           return ListView.builder(
-            itemCount: petList.length,
-            itemBuilder: ((context, index) {
-              Pet petDocument = petList[index];
+            itemCount: state.petList.length,
+            itemBuilder: (context, index) {
+              Pet petDocument = state.petList[index];
+              if (state.petList.isEmpty) {
+                noPets();
+              }
               if (petDocument.backgroundImage != "") {
                 backgroundImage = Image.network(petDocument.backgroundImage);
               } else {
@@ -207,7 +211,13 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
                                           child: const Text('Cancel'),
                                         ),
                                         TextButton(
-                                          onPressed: () async {},
+                                          onPressed: () async {
+                                            await context.read<PetProfileCubit>().deletePetProfile(
+                                                uid: context.read<AuthBloc>().state.user!.uid,
+                                                pid: petDocument.id);
+                                            _getPetList();
+                                            Navigator.pop(context, 'OK');
+                                          },
                                           child: const Text('OK'),
                                         ),
                                       ],
@@ -226,7 +236,7 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
                   ),
                 ),
               );
-            }),
+            },
           );
         },
       ),

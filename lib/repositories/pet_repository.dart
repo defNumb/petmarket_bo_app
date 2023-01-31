@@ -11,6 +11,16 @@ class PetRepository {
   PetRepository({
     required this.firebaseFirestore,
   });
+
+  // Stream of pet list
+  Stream<List<Pet>> get petListStream => usersRef
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('pets')
+          .snapshots()
+          .map((petList) {
+        return petList.docs.map((petDoc) => Pet.fromDoc(petDoc)).toList();
+      });
+
   // Get pet profile
   Future<Pet> getPetProfile({required String uid, required String pid}) async {
     try {
@@ -30,7 +40,7 @@ class PetRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.getPetProfile',
       );
     }
   }
@@ -63,9 +73,9 @@ class PetRepository {
   // Add pet
   Future createPet(Pet pet) async {
     try {
-      final petDoc = await usersRef.doc(FirebaseAuth.instance.currentUser!.uid).collection('pets');
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      final petDoc = await usersRef.doc(uid).collection('pets');
       var randomDoc = petDoc.doc();
-      print('works here');
       await petDoc.doc(randomDoc.id).set(
         {
           'id': randomDoc.id,
@@ -80,7 +90,7 @@ class PetRepository {
           'healthConditions': pet.healthConditions,
           'neutered': pet.neutered,
           'backgroundImage': pet.backgroundImage,
-          'referenceId': FirebaseAuth.instance.currentUser!.uid,
+          'referenceId': uid,
         },
       );
       throw 'Oops try again!';
@@ -94,7 +104,7 @@ class PetRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.createPet',
       );
     }
   }
@@ -129,7 +139,7 @@ class PetRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.updatePet',
       );
     }
   }
@@ -150,7 +160,7 @@ class PetRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.deletePet',
       );
     }
   }

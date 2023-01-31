@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
 import 'package:petmarket_bo_app/models/pet_model.dart';
 import 'package:petmarket_bo_app/utils/error_dialog.dart';
@@ -28,13 +30,11 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       _backgroundImage;
 
   void _submit() {
-    print('works here');
     setState(() {
       _autoValidateMode = AutovalidateMode.always;
     });
     print('works here');
     final form = _formKey.currentState;
-    print(form);
     if (form == null || !form.validate()) {
       print('Form is invalid');
       return;
@@ -45,7 +45,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       id: '',
       icon: _icon ?? 'assets/images/dog_icon.png',
       name: _name!,
-      breed: _breed ?? '',
+      breed: _breed ?? 'Perro',
       breed2: _breed2 ?? '',
       species: _species!,
       gender: _gender ?? '',
@@ -56,7 +56,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       backgroundImage: _backgroundImage ?? '',
       referenceId: '',
     );
-    context.read<SignupPetCubit>().signup(pet: newPet);
+    context.read<SignupPetCubit>().createPet(pet: newPet);
+    context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
     Navigator.of(context).pop();
   }
 

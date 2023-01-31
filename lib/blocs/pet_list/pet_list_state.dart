@@ -4,6 +4,7 @@ enum PetListStatus {
   initial,
   loading,
   loaded,
+  updated,
   error,
 }
 

@@ -31,4 +31,24 @@ class PetListCubit extends Cubit<PetListState> {
       return [];
     }
   }
+
+  // Update pet list
+  void updatePetList({required String uid}) async {
+    try {
+      final List<Pet> petList = await petRepository.getPetList(uid: uid);
+      emit(
+        state.copyWith(
+          listStatus: PetListStatus.updated,
+          petList: petList,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          listStatus: PetListStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }

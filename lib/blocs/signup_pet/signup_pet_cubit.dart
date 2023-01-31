@@ -14,7 +14,7 @@ class SignupPetCubit extends Cubit<SignupPetState> {
           SignupPetState.initial(),
         );
 
-  Future<void> signup({
+  Future<void> createPet({
     required Pet pet,
   }) async {
     emit(state.copyWith(signupPetStatus: SignupPetStatus.submitting));
