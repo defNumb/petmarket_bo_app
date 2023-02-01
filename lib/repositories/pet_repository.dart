@@ -71,9 +71,8 @@ class PetRepository {
   }
 
   // Add pet
-  Future createPet(Pet pet) async {
+  Future<void> createPet(Pet pet, String uid) async {
     try {
-      String uid = FirebaseAuth.instance.currentUser!.uid;
       final petDoc = await usersRef.doc(uid).collection('pets');
       var randomDoc = petDoc.doc();
       await petDoc.doc(randomDoc.id).set(
@@ -93,7 +92,6 @@ class PetRepository {
           'referenceId': uid,
         },
       );
-      throw 'Oops try again!';
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,

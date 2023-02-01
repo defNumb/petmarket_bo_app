@@ -56,7 +56,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       backgroundImage: _backgroundImage ?? '',
       referenceId: '',
     );
-    context.read<SignupPetCubit>().createPet(pet: newPet);
+    context.read<SignupPetCubit>().createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
     context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
     Navigator.of(context).pop();
   }
