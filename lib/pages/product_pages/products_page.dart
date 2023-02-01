@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
-import 'package:petmarket_bo_app/pages/product_pages/product_details.dart';
-import 'package:petmarket_bo_app/utils/error_dialog.dart';
+import '../../blocs/product_list/product_list_cubit.dart';
+import 'product_details.dart';
+import '../../utils/error_dialog.dart';
 
 import '../../constants/app_constants.dart';
 import '../../models/product_model.dart';

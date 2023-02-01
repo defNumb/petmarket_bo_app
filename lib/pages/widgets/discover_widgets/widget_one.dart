@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/product_pages/products_page.dart';
+import '../../product_pages/products_page.dart';
 
 class WidgetOne extends StatefulWidget {
   const WidgetOne({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:petmarket_bo_app/models/pet_model.dart';
+import '../../../models/pet_model.dart';
 
 class PetProfile extends StatefulWidget {
   final Pet pet;

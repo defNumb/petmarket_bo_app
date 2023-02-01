@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:petmarket_bo_app/models/custom_error.dart';
-import 'package:petmarket_bo_app/repositories/auth_repository.dart';
+import '../../models/custom_error.dart';
+import '../../repositories/auth_repository.dart';
 
 part 'signin_state.dart';
 

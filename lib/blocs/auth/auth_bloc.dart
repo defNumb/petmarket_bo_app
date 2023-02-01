@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
-import 'package:petmarket_bo_app/blocs/auth/auth_state.dart';
-import 'package:petmarket_bo_app/repositories/auth_repository.dart';
+import 'auth_state.dart';
+import '../../repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 

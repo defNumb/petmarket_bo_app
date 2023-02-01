@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
-import 'package:petmarket_bo_app/blocs/profile/profile_cubit.dart';
-import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
-import 'package:petmarket_bo_app/utils/error_dialog.dart';
+import '../../blocs/auth/auth_bloc.dart';
+import '../../blocs/profile/profile_cubit.dart';
+import '../profile_pages/my_pets.dart';
+import '../../utils/error_dialog.dart';
 
 import '../../constants/app_constants.dart';
 
