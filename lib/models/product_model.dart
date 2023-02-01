@@ -11,11 +11,10 @@ class Product extends Equatable {
   final String subCategory;
   final String brand;
   final String image;
-  final List<dynamic> price;
+  final Map<dynamic, int> price;
   final int discount;
   final int stock;
   final int rating;
-  final List<dynamic> weight;
   final List<dynamic> tags;
 
   Product({
@@ -30,13 +29,12 @@ class Product extends Equatable {
     required this.discount,
     required this.stock,
     required this.rating,
-    required this.weight,
     required this.tags,
   });
 
   // Factory constructor to retrieve information from firebase
   factory Product.fromDoc(DocumentSnapshot productDoc) {
-    final productData = productDoc.data() as Map<String, dynamic>?;
+    final Map<String, dynamic>? productData = productDoc.data() as Map<String, dynamic>?;
     return Product(
       id: productDoc.id,
       name: productData!['name'] ?? '',
@@ -45,12 +43,11 @@ class Product extends Equatable {
       subCategory: productData['subCategory'] ?? '',
       brand: productData['brand'] ?? '',
       image: productData['image'] ?? '',
-      price: productData['price'] ?? [],
+      price: Map<String, int>.from(productData['price']),
       discount: productData['discount'] ?? -1,
       stock: productData['stock'] ?? -1,
       rating: productData['rating'] ?? -1,
       tags: productData['tags'] ?? [],
-      weight: productData['weight'] ?? [],
     );
   }
 
@@ -64,12 +61,11 @@ class Product extends Equatable {
       subCategory: '',
       brand: '',
       image: '',
-      price: [],
+      price: {},
       discount: -1,
       stock: -1,
       rating: -1,
       tags: [],
-      weight: [],
     );
   }
 
@@ -88,7 +84,6 @@ class Product extends Equatable {
       discount,
       stock,
       rating,
-      weight,
       tags,
     ];
   }
@@ -97,7 +92,6 @@ class Product extends Equatable {
   @override
   bool get stringify => true;
 
-  // CopyWith
   Product copyWith({
     String? id,
     String? name,
@@ -106,12 +100,11 @@ class Product extends Equatable {
     String? subCategory,
     String? brand,
     String? image,
-    List<dynamic>? price,
+    Map<dynamic, int>? price,
     int? discount,
     int? stock,
     int? rating,
     List<dynamic>? tags,
-    List<dynamic>? weight,
   }) {
     return Product(
       id: id ?? this.id,
@@ -126,7 +119,6 @@ class Product extends Equatable {
       stock: stock ?? this.stock,
       rating: rating ?? this.rating,
       tags: tags ?? this.tags,
-      weight: weight ?? this.weight,
     );
   }
 }

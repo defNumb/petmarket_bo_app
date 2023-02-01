@@ -12,6 +12,7 @@ import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
 import 'package:petmarket_bo_app/pages/home_page.dart';
 import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
+import 'package:petmarket_bo_app/pages/shopping_cart_page.dart';
 import 'package:petmarket_bo_app/pages/signin_page.dart';
 import 'package:petmarket_bo_app/pages/signup_page.dart';
 import 'package:petmarket_bo_app/pages/splash_page.dart';
@@ -126,6 +127,7 @@ class MyApp extends StatelessWidget {
             MyPetsScreen.routeName: (context) => MyPetsScreen(),
             RegisterPetScreen.routeName: (context) => RegisterPetScreen(),
             ProductsPage.routeName: (context) => ProductsPage(),
+            ShoppingCartPage.routeName: (context) => ShoppingCartPage(),
           },
         ),
       ),

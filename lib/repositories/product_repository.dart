@@ -40,6 +40,7 @@ class ProductRepository {
     }
   }
 
+  // TODO: get product list by category AND FIX MAP.LIST TYPES
   // get product list
   Future<List<Product>> getProductList() async {
     try {
