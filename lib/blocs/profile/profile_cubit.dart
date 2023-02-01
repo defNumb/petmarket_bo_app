@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:petmarket_bo_app/models/custom_error.dart';
-import 'package:petmarket_bo_app/models/user_model.dart';
-import 'package:petmarket_bo_app/repositories/profile_repository.dart';
+import '../../models/custom_error.dart';
+import '../../models/user_model.dart';
+import '../../repositories/profile_repository.dart';
 
 part 'profile_state.dart';
 

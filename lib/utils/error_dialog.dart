@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/models/custom_error.dart';
+import '../models/custom_error.dart';
 import 'dart:io';
 
 void errorDialog(BuildContext context, CustomError e) {

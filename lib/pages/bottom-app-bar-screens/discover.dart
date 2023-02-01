@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/banner_one.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/image_slider.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/widget_one.dart';
+
+import '../widgets/discover_widgets/banner_one.dart';
+import '../widgets/discover_widgets/image_slider.dart';
+import '../widgets/discover_widgets/widget_one.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({Key? key}) : super(key: key);
