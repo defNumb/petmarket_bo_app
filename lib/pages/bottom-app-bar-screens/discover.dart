@@ -32,7 +32,9 @@ class DiscoverPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/shopping_cart');
+                },
                 icon: const Icon(Icons.shopping_cart),
                 iconSize: 30,
               ),

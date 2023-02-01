@@ -3,23 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'blocs/auth/auth_bloc.dart';
-import 'blocs/pet_list/pet_list_cubit.dart';
-import 'blocs/pet_profile/pet_profile_cubit.dart';
-import 'blocs/profile/profile_cubit.dart';
-import 'blocs/signin/signin_cubit.dart';
-import 'blocs/signup/signup_cubit.dart';
-import 'blocs/signup_pet/signup_pet_cubit.dart';
-import 'pages/home_page.dart';
-import 'pages/profile_pages/my_pets.dart';
-import 'pages/signin_page.dart';
-import 'pages/signup_page.dart';
-import 'pages/splash_page.dart';
-import 'pages/widgets/pet_profile_widgets/add_pet.dart';
-import 'repositories/auth_repository.dart';
-import 'repositories/pet_repository.dart';
-import 'repositories/product_repository.dart';
-import 'repositories/profile_repository.dart';
+import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
+import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
+import 'package:petmarket_bo_app/blocs/pet_profile/pet_profile_cubit.dart';
+import 'package:petmarket_bo_app/blocs/profile/profile_cubit.dart';
+import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
+import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
+import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
+import 'package:petmarket_bo_app/pages/home_page.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
+import 'package:petmarket_bo_app/pages/shopping_cart_page.dart';
+import 'package:petmarket_bo_app/pages/signin_page.dart';
+import 'package:petmarket_bo_app/pages/signup_page.dart';
+import 'package:petmarket_bo_app/pages/splash_page.dart';
+import 'package:petmarket_bo_app/pages/widgets/pet_profile_widgets/add_pet.dart';
+import 'package:petmarket_bo_app/repositories/auth_repository.dart';
+import 'package:petmarket_bo_app/repositories/pet_repository.dart';
+import 'package:petmarket_bo_app/repositories/product_repository.dart';
+import 'package:petmarket_bo_app/repositories/profile_repository.dart';
 import 'blocs/product_description/product_description_cubit.dart';
 import 'blocs/product_list/product_list_cubit.dart';
 import 'firebase_options.dart';
@@ -126,6 +127,7 @@ class MyApp extends StatelessWidget {
             MyPetsScreen.routeName: (context) => MyPetsScreen(),
             RegisterPetScreen.routeName: (context) => RegisterPetScreen(),
             ProductsPage.routeName: (context) => ProductsPage(),
+            ShoppingCartPage.routeName: (context) => ShoppingCartPage(),
           },
         ),
       ),

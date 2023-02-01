@@ -72,7 +72,7 @@ class _ProductsPageState extends State<ProductsPage> {
           return ListView.builder(
             itemCount: state.productList.length,
             itemBuilder: (context, index) {
-              Product productDocument = state.productList[index];
+              Product? productDocument = state.productList[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
@@ -133,7 +133,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(0, 20, 65, 0),
                                             child: Text(
-                                              "Bs.${productDocument.price.first} - Bs.${productDocument.price.last}",
+                                              "Desde Bs. ${productDocument.price.values.first}",
                                               style: const TextStyle(
                                                   fontFamily: "QuickSand",
                                                   color: Color.fromARGB(255, 205, 42, 30),
@@ -159,7 +159,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(0, 0, 30, 20),
                                             child: Text(
-                                              "${productDocument.weight.length.toString()} tamaños, 1 sabor",
+                                              " tamaños, 1 sabor",
                                               style: const TextStyle(
                                                   fontFamily: "QuickSand", color: Colors.black),
                                             ),
