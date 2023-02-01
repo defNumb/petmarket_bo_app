@@ -16,10 +16,11 @@ class SignupPetCubit extends Cubit<SignupPetState> {
 
   Future<void> createPet({
     required Pet pet,
+    required String uid,
   }) async {
     emit(state.copyWith(signupPetStatus: SignupPetStatus.submitting));
     try {
-      await petRepository.createPet(pet);
+      await petRepository.createPet(pet,uid);
       emit(state.copyWith(signupPetStatus: SignupPetStatus.success));
     } on CustomError catch (e) {
       emit(

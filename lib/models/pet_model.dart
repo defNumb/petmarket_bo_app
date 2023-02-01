@@ -54,9 +54,9 @@ class Pet extends Equatable {
     );
   }
   // constructor to set information to firebase
-  Map<String, dynamic> toDoc(Pet pet) {
+  Map<String, dynamic> toDoc(Pet pet, String id) {
     return <String, dynamic>{
-      id: pet.id,
+      id: id,
       name: pet.name,
       icon: pet.icon,
       species: pet.species,
