@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.9.0"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   bloc:
     dependency: transitive
     description:
@@ -216,8 +223,7 @@ packages:
     dependency: transitive
     description:
       name: hive
-      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.3"
   http:
@@ -238,8 +244,7 @@ packages:
     dependency: "direct main"
     description:
       name: hydrated_bloc
-      sha256: "5871204f14b24638dc9d18d5b94cf22a66fc4be40756925cafff3a7553c7d7b7"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "9.0.0"
   intl:
@@ -407,19 +412,14 @@ packages:
       name: string_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "1.1.1"
-=======
-    version: "1.2.0"
   synchronized:
     dependency: transitive
     description:
       name: synchronized
-      sha256: "33b31b6beb98100bf9add464a36a8dd03eb10c7a8cf15aeec535e9b054aaf04b"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
->>>>>>> 29c3874e438316f9d621d3ce31ffa95f1f77b1ae
   term_glyph:
     dependency: transitive
     description:

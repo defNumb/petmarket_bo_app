@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
 
 import '../widgets/discover_widgets/banner_one.dart';
 import '../widgets/discover_widgets/image_slider.dart';
@@ -31,13 +32,7 @@ class DiscoverPage extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/shopping_cart');
-                },
-                icon: const Icon(Icons.shopping_cart),
-                iconSize: 30,
-              ),
+              child: shoppingCartIcon(context),
             )
           ],
           // bottom: PreferredSize(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/blocs/shopping_cart/shopping_cart_bloc.dart';
 
 import '../../blocs/product_description/product_description_cubit.dart';
 import '../../constants/app_constants.dart';
+import '../../models/cart_item_model.dart';
 import '../../utils/error_dialog.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -64,7 +66,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/shopping_cart');
+              },
               icon: const Icon(Icons.shopping_cart),
               iconSize: 30,
             ),
@@ -280,7 +284,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     height: 50,
                     color: Colors.yellow,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        CartItem cartItem = CartItem(
+                            id: state.product.id,
+                            name: state.product.name,
+                            price: state.product.price.values.last.toDouble(),
+                            quantity: 1,
+                            image: state.product.image);
+                        print(cartItem);
+                        context.read<ShoppingCartBloc>().add(AddToCartEvent(cartItem: cartItem));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [

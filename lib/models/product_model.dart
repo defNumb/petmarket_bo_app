@@ -51,6 +51,24 @@ class Product extends Equatable {
     );
   }
 
+  // set product to firebase
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'category': category,
+      'subCategory': subCategory,
+      'brand': brand,
+      'image': image,
+      'price': price,
+      'discount': discount,
+      'stock': stock,
+      'rating': rating,
+      'tags': tags,
+    };
+  }
+
   // Factory constructor to set product intially that is not in firestore
   factory Product.initialProduct() {
     return Product(

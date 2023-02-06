@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petmarket_bo_app/pages/map_pages/placeholder.dart';
 
 import '../pages/bottom-app-bar-screens/discover.dart';
 import '../pages/bottom-app-bar-screens/menu.dart';
@@ -16,7 +17,7 @@ class _BottomNavigationBarControllerState extends State<BottomNavigationBarContr
   final List<Widget> pages = [
     const DiscoverPage(),
     const ShopPage(),
-    const Text('Hola'),
+    const PlaceHolderPage(),
     const UserProfile(),
     const MenuPage(),
   ];
