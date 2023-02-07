@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/blocs/shopping_cart/shopping_cart_bloc.dart';
+import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
 
 import '../../blocs/product_description/product_description_cubit.dart';
 import '../../constants/app_constants.dart';
@@ -64,14 +65,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/shopping_cart');
-              },
-              icon: const Icon(Icons.shopping_cart),
-              iconSize: 30,
-            ),
+            padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
+            child: shoppingCartIcon(context),
           )
         ],
       ),
@@ -198,8 +193,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   // PRODUCT PRICE
                   Text(
                     weight != null
-                        ? "Bs. ${state.product.price[weight].toString()}"
-                        : "Desde Bs. ${state.product.price.values.last.toString()}",
+                        ? "Bs. ${state.product.price.toString()}"
+                        : "Desde Bs. ${state.product.price.toString()}",
                     style: const TextStyle(
                       fontFamily: fontType,
                       fontSize: 20,
@@ -220,39 +215,39 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(
-                    child: DropdownButton<String>(
-                      dropdownColor: Colors.white,
-                      underline: Container(
-                        height: 3,
-                        color: Colors.black87, //<-- SEE HERE
-                      ),
-                      isExpanded: true,
-                      hint: const Text("Selecciona el peso"),
-                      value: weight,
-                      items: state.product.price.keys
-                          .map(
-                            (item) => DropdownMenuItem<String>(
-                              value: item.toString(),
-                              child: Center(
-                                child: Text(
-                                  item.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 15, color: Colors.black87),
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (item) {
-                        setState(
-                          () {
-                            weight = item;
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                  // SizedBox(
+                  //   child: DropdownButton<String>(
+                  //     dropdownColor: Colors.white,
+                  //     underline: Container(
+                  //       height: 3,
+                  //       color: Colors.black87, //<-- SEE HERE
+                  //     ),
+                  //     isExpanded: true,
+                  //     hint: const Text("Selecciona el peso"),
+                  //     value: weight,
+                  //     items: state.product.price.keys
+                  //         .map(
+                  //           (item) => DropdownMenuItem<String>(
+                  //             value: item.toString(),
+                  //             child: Center(
+                  //               child: Text(
+                  //                 item.toString(),
+                  //                 textAlign: TextAlign.center,
+                  //                 style: const TextStyle(fontSize: 15, color: Colors.black87),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         )
+                  //         .toList(),
+                  //     onChanged: (item) {
+                  //       setState(
+                  //         () {
+                  //           weight = item;
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 40,
                   ),
@@ -288,7 +283,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         CartItem cartItem = CartItem(
                             id: state.product.id,
                             name: state.product.name,
-                            price: state.product.price.values.last.toDouble(),
+                            price: state.product.price,
                             quantity: 1,
                             image: state.product.image);
                         print(cartItem);

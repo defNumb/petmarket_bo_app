@@ -31,7 +31,7 @@ class DiscoverPage extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
+              padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
               child: shoppingCartIcon(context),
             )
           ],

@@ -11,7 +11,8 @@ class Product extends Equatable {
   final String subCategory;
   final String brand;
   final String image;
-  final Map<dynamic, int> price;
+  final double price;
+  final double weight;
   final int discount;
   final int stock;
   final int rating;
@@ -26,6 +27,7 @@ class Product extends Equatable {
     required this.brand,
     required this.image,
     required this.price,
+    required this.weight,
     required this.discount,
     required this.stock,
     required this.rating,
@@ -43,10 +45,11 @@ class Product extends Equatable {
       subCategory: productData['subCategory'] ?? '',
       brand: productData['brand'] ?? '',
       image: productData['image'] ?? '',
-      price: Map<String, int>.from(productData['price']),
-      discount: productData['discount'] ?? -1,
-      stock: productData['stock'] ?? -1,
-      rating: productData['rating'] ?? -1,
+      price: productData['price'].toDouble(),
+      weight: productData['weight'].toDouble(),
+      discount: productData['discount'] ?? 0,
+      stock: productData['stock'] ?? 0,
+      rating: productData['rating'] ?? 0,
       tags: productData['tags'] ?? [],
     );
   }
@@ -79,10 +82,11 @@ class Product extends Equatable {
       subCategory: '',
       brand: '',
       image: '',
-      price: {},
-      discount: -1,
-      stock: -1,
-      rating: -1,
+      price: 0.00,
+      weight: 0.00,
+      discount: 0,
+      stock: 0,
+      rating: 0,
       tags: [],
     );
   }
@@ -99,6 +103,7 @@ class Product extends Equatable {
       brand,
       image,
       price,
+      weight,
       discount,
       stock,
       rating,
@@ -118,7 +123,8 @@ class Product extends Equatable {
     String? subCategory,
     String? brand,
     String? image,
-    Map<dynamic, int>? price,
+    double? price,
+    double? weight,
     int? discount,
     int? stock,
     int? rating,
@@ -133,6 +139,7 @@ class Product extends Equatable {
       brand: brand ?? this.brand,
       image: image ?? this.image,
       price: price ?? this.price,
+      weight: weight ?? this.weight,
       discount: discount ?? this.discount,
       stock: stock ?? this.stock,
       rating: rating ?? this.rating,

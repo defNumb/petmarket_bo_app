@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/my_address.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/purchase_history.dart';
+import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/profile/profile_cubit.dart';
+import '../profile_pages/favorites.dart';
 import '../profile_pages/my_pets.dart';
 import '../../utils/error_dialog.dart';
 
 import '../../constants/app_constants.dart';
+import '../profile_pages/payment_methods.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -58,11 +63,10 @@ class _UserProfileState extends State<UserProfile> {
             ),
           )),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.shopping_cart),
-              iconSize: 30,
-            )
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+              child: shoppingCartIcon(context),
+            ),
           ],
         ),
       ),
@@ -288,7 +292,9 @@ class _UserProfileState extends State<UserProfile> {
                 const Divider(height: 0, color: Colors.white60),
                 // Historial de Compras
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(PurchaseHistory.routeName);
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                     width: MediaQuery.of(context).size.width,
@@ -327,7 +333,9 @@ class _UserProfileState extends State<UserProfile> {
                 const Divider(height: 0, color: Colors.white60),
                 // Mis Favoritos
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(Favorites.routeName);
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                     width: MediaQuery.of(context).size.width,
@@ -366,7 +374,9 @@ class _UserProfileState extends State<UserProfile> {
                 const Divider(height: 0, color: Colors.white60),
                 // Metodos de Pago
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(PaymentMethodPage.routeName);
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                     width: MediaQuery.of(context).size.width,
@@ -405,7 +415,9 @@ class _UserProfileState extends State<UserProfile> {
                 const Divider(height: 0, color: Colors.white60),
                 // Direcciones
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(MyAddressPage.routeName);
+                  },
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                     width: MediaQuery.of(context).size.width,

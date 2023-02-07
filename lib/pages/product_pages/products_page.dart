@@ -133,7 +133,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(0, 20, 65, 0),
                                             child: Text(
-                                              "Desde Bs. ${productDocument.price.values.first}",
+                                              "Desde Bs. ${productDocument.price}",
                                               style: const TextStyle(
                                                   fontFamily: "QuickSand",
                                                   color: Color.fromARGB(255, 205, 42, 30),

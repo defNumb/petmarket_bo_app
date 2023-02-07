@@ -15,7 +15,10 @@ import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
 import 'package:petmarket_bo_app/pages/home_page.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/favorites.dart';
 import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/payment_methods.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/purchase_history.dart';
 import 'package:petmarket_bo_app/pages/shopping_cart_page.dart';
 import 'package:petmarket_bo_app/pages/signin_page.dart';
 import 'package:petmarket_bo_app/pages/signup_page.dart';
@@ -30,6 +33,7 @@ import 'blocs/product_description/product_description_cubit.dart';
 import 'blocs/product_list/product_list_cubit.dart';
 import 'firebase_options.dart';
 import 'pages/product_pages/products_page.dart';
+import 'pages/profile_pages/my_address.dart';
 import 'repositories/shopping_cart_repository.dart';
 
 void main() async {
@@ -160,6 +164,10 @@ class MyApp extends StatelessWidget {
             RegisterPetScreen.routeName: (context) => RegisterPetScreen(),
             ProductsPage.routeName: (context) => ProductsPage(),
             ShoppingCartPage.routeName: (context) => ShoppingCartPage(),
+            PurchaseHistory.routeName: (context) => PurchaseHistory(),
+            Favorites.routeName: (context) => Favorites(),
+            MyAddressPage.routeName: (context) => MyAddressPage(),
+            PaymentMethodPage.routeName: (context) => PaymentMethodPage(),
           },
         ),
       ),
