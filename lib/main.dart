@@ -15,6 +15,7 @@ import 'package:petmarket_bo_app/blocs/signin/signin_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup/signup_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
 import 'package:petmarket_bo_app/pages/home_page.dart';
+import 'package:petmarket_bo_app/pages/profile_pages/account_options.dart';
 import 'package:petmarket_bo_app/pages/profile_pages/favorites.dart';
 import 'package:petmarket_bo_app/pages/profile_pages/my_pets.dart';
 import 'package:petmarket_bo_app/pages/profile_pages/payment_methods.dart';
@@ -34,6 +35,7 @@ import 'blocs/product_list/product_list_cubit.dart';
 import 'firebase_options.dart';
 import 'pages/product_pages/products_page.dart';
 import 'pages/profile_pages/my_address.dart';
+import 'pages/profile_pages/notifications.dart';
 import 'repositories/shopping_cart_repository.dart';
 
 void main() async {
@@ -168,6 +170,8 @@ class MyApp extends StatelessWidget {
             Favorites.routeName: (context) => Favorites(),
             MyAddressPage.routeName: (context) => MyAddressPage(),
             PaymentMethodPage.routeName: (context) => PaymentMethodPage(),
+            AccountOptionsPage.routeName: (context) => AccountOptionsPage(),
+            NotificationOptionsPage.routeName: (context) => NotificationOptionsPage(),
           },
         ),
       ),
