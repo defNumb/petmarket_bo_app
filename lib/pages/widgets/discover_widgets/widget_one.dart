@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
+import '../../../blocs/product_filter/product_filter_cubit.dart';
+import '../../../models/product_model.dart';
 import '../../product_pages/products_page.dart';
 
 class WidgetOne extends StatefulWidget {
@@ -26,7 +30,7 @@ class _WidgetOneState extends State<WidgetOne> {
     const CardCategory(
       urlImage: 'assets/images/testcat1.png',
       title: 'Gatos',
-      link: Text('Hola'),
+      link: ProductsPage(),
     ),
     const CardCategory(
       urlImage: 'assets/images/testparrot1.png',
@@ -101,9 +105,17 @@ class _WidgetOneState extends State<WidgetOne> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return item.link;
-                }));
+                if (item.title == 'Perros') {
+                  //context.read<ProductFilterCubit>().changeFilter(Filter.perro);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return item.link;
+                  }));
+                } else if (item.title == 'Gatos') {
+                  context.read<ProductFilterCubit>().changeFilter(Filter.gato);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return item.link;
+                  }));
+                }
               },
               child: Container(
                 height: 130,

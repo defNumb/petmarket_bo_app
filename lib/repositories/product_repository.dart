@@ -4,12 +4,22 @@ import 'package:petmarket_bo_app/models/product_model.dart';
 
 import '../constants/db_constant.dart';
 import '../models/custom_error.dart';
+import '../models/product_detail_model.dart';
 
 class ProductRepository {
   final FirebaseFirestore firebaseFirestore;
   ProductRepository({
     required this.firebaseFirestore,
   });
+
+  // Stream of product detail
+  Stream<ProductDetail> getProductDetailStream({required String pid}) {
+    return productsRef
+        .doc(pid)
+        .collection("product_details")
+        .snapshots()
+        .map((productDoc) => ProductDetail.fromDoc(productDoc));
+  }
 
   // Stream of product list
   Stream<List<Product>> get productListStream => productsRef.snapshots().map((productList) {
@@ -63,6 +73,112 @@ class ProductRepository {
         code: 'Exception',
         message: e.toString(),
         plugin: 'flutter_error/server_error.getProductList',
+      );
+    }
+  }
+
+  // filter by category
+  Future<List<Product>> filterByCategory({required String category}) async {
+    try {
+      final QuerySnapshot productList =
+          await productsRef.where('category', isEqualTo: category).get();
+      if (productList.docs.isNotEmpty) {
+        final productListData =
+            productList.docs.map((productDoc) => Product.fromDoc(productDoc)).toList();
+        return productListData;
+      } else {
+        return [];
+      }
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.filterByCategory',
+      );
+    }
+  }
+
+  // filter by subcategory
+  Future<List<Product>> filterBySubCategory({required String subCategory}) async {
+    try {
+      final QuerySnapshot productList =
+          await productsRef.where('sub_category', isEqualTo: subCategory).get();
+      if (productList.docs.isNotEmpty) {
+        final productListData =
+            productList.docs.map((productDoc) => Product.fromDoc(productDoc)).toList();
+        return productListData;
+      } else {
+        return [];
+      }
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.filterBySubCategory',
+      );
+    }
+  }
+
+  // filter by animal
+  Future<List<Product>> filterByAnimal({required String animal}) async {
+    try {
+      final QuerySnapshot productList = await productsRef.where('animal', isEqualTo: animal).get();
+      if (productList.docs.isNotEmpty) {
+        final productListData =
+            productList.docs.map((productDoc) => Product.fromDoc(productDoc)).toList();
+        return productListData;
+      } else {
+        return [];
+      }
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.filterByAnimal',
+      );
+    }
+  }
+
+  // filter by brand
+  Future<List<Product>> filterByBrand({required String brand}) async {
+    try {
+      final QuerySnapshot productList = await productsRef.where('brand', isEqualTo: brand).get();
+      if (productList.docs.isNotEmpty) {
+        final productListData =
+            productList.docs.map((productDoc) => Product.fromDoc(productDoc)).toList();
+        return productListData;
+      } else {
+        return [];
+      }
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.filterByBrand',
       );
     }
   }

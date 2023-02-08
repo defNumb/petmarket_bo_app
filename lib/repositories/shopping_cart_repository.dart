@@ -34,10 +34,12 @@ class ShoppingCartRepository {
           .collection('shopping_cart')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
+
       if (shoppingCartDoc.exists) {
         final currentShoppingCart = ShoppingCart.fromDoc(shoppingCartDoc);
         return currentShoppingCart;
       }
+
       throw 'Shopping cart not found';
     } on FirebaseException catch (e) {
       throw CustomError(

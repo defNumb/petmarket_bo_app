@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
+import 'package:petmarket_bo_app/blocs/filtered_products/filtered_products_cubit.dart';
 import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
 import 'package:petmarket_bo_app/blocs/pet_profile/pet_profile_cubit.dart';
 import 'package:petmarket_bo_app/blocs/profile/profile_cubit.dart';
@@ -31,7 +32,9 @@ import 'package:petmarket_bo_app/repositories/product_repository.dart';
 import 'package:petmarket_bo_app/repositories/profile_repository.dart';
 import 'blocs/badges/badges_cubit.dart';
 import 'blocs/product_description/product_description_cubit.dart';
+import 'blocs/product_filter/product_filter_cubit.dart';
 import 'blocs/product_list/product_list_cubit.dart';
+import 'blocs/product_search/product_search_cubit.dart';
 import 'firebase_options.dart';
 import 'pages/product_pages/products_page.dart';
 import 'pages/profile_pages/my_address.dart';
@@ -148,6 +151,17 @@ class MyApp extends StatelessWidget {
           BlocProvider<BadgesCubit>(
             create: (context) => BadgesCubit(
               shoppingCartBloc: context.read<ShoppingCartBloc>(),
+            ),
+          ),
+          BlocProvider<ProductFilterCubit>(
+            create: (context) => ProductFilterCubit(),
+          ),
+          BlocProvider<ProductSearchCubit>(
+            create: (context) => ProductSearchCubit(),
+          ),
+          BlocProvider<FilteredProductsCubit>(
+            create: (context) => FilteredProductsCubit(
+              initialProducts: context.read<ProductListCubit>().state.productList,
             ),
           ),
         ],

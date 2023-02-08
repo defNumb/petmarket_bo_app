@@ -99,7 +99,7 @@ class CatCategory extends StatelessWidget {
                       onTap: () {},
                       child: Center(
                         child: Text(
-                          "JUGUETES",
+                          "SNACKS",
                           style: GoogleFonts.roboto(
                             color: Colors.white,
                             fontSize: 12,

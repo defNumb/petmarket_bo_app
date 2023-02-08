@@ -278,8 +278,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Container(
                     height: 50,
                     color: Colors.yellow,
-                    child: GestureDetector(
-                      onTap: () {
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      onPressed: () {
                         CartItem cartItem = CartItem(
                             id: state.product.id,
                             name: state.product.name,
@@ -294,11 +297,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         children: const [
                           Text(
                             "Agregar al carrito",
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(fontSize: 16, color: Colors.black87),
                           ),
                           Icon(
                             Icons.add_shopping_cart_outlined,
                             size: 30,
+                            color: Colors.black87,
                           )
                         ],
                       ),
