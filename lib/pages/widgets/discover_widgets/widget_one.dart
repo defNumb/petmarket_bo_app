@@ -1,6 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
+
 import '../../../blocs/product_filter/product_filter_cubit.dart';
 import '../../../models/product_model.dart';
 import '../../product_pages/products_page.dart';
@@ -32,16 +33,16 @@ class _WidgetOneState extends State<WidgetOne> {
       title: 'Gatos',
       link: ProductsPage(),
     ),
-    const CardCategory(
-      urlImage: 'assets/images/testparrot1.png',
-      title: 'Aves',
-      link: Text('Hola'),
-    ),
-    const CardCategory(
-      urlImage: 'assets/images/testrat1.png',
-      title: 'Animales Pequeños',
-      link: Text('Hola'),
-    )
+    // const CardCategory(
+    //   urlImage: 'assets/images/testparrot1.png',
+    //   title: 'Aves',
+    //   link: Text('Hola'),
+    // ),
+    // const CardCategory(
+    //   urlImage: 'assets/images/testrat1.png',
+    //   title: 'Animales Pequeños',
+    //   link: Text('Hola'),
+    // )
   ];
 
   @override
@@ -53,41 +54,41 @@ class _WidgetOneState extends State<WidgetOne> {
             child: Stack(
               children: <Widget>[
                 // Stroked text as border.
-                Text(
-                  'Descubre por mascota',
-                  style: TextStyle(
-                    fontFamily: "Marhey",
-                    fontSize: 30,
-                    foreground: Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 2
-                      ..color = Colors.black,
-                  ),
-                ),
+                // Text(
+                //   'Descubre por mascota',
+                //   style: TextStyle(
+                //     fontFamily: "Quicksand",
+                //     fontSize: 30,
+                //     foreground: Paint()
+                //       ..style = PaintingStyle.stroke
+                //       ..strokeWidth = 2
+                //       ..color = Colors.white,
+                //   ),
+                // ),
                 // Solid text as fill.
                 const Text(
                   'Descubre por mascota',
                   style: TextStyle(
-                    fontFamily: "Marhey",
-                    fontSize: 30,
-                    color: Colors.white,
+                    fontFamily: "Quicksand",
+                    fontSize: 25,
+                    color: Colors.black,
                   ),
                 ),
               ],
             )),
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 30.0),
           // ignore: sized_box_for_whitespace
           child: Container(
             height: 150,
             child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: 4,
-              separatorBuilder: (context, _) => const SizedBox(
-                width: 12,
-              ),
-              itemBuilder: (context, index) => buildCard(item: items[index]),
-            ),
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                separatorBuilder: (context, _) => SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                    ),
+                itemBuilder: (context, index) => // buildCard(item: items[index]),
+                    BuildCard(item: items[index])),
           ),
         ),
       ],
@@ -106,21 +107,23 @@ class _WidgetOneState extends State<WidgetOne> {
             GestureDetector(
               onTap: () {
                 if (item.title == 'Perros') {
-                  //context.read<ProductFilterCubit>().changeFilter(Filter.perro);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return item.link;
-                  }));
+                  // Change filter to perro
+                  context.watch<ProductFilterCubit>().changeFilter(Filter.perro);
+                  print(context.read<ProductFilterCubit>().state);
+                  // Navigate to products pae using route name
+                  Navigator.of(context).pushNamed(ProductsPage.routeName);
                 } else if (item.title == 'Gatos') {
-                  context.read<ProductFilterCubit>().changeFilter(Filter.gato);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return item.link;
-                  }));
+                  // get product list
+                  context.watch<ProductFilterCubit>().changeFilter(Filter.gato);
+                  print(context.read<ProductFilterCubit>().state);
+                  Navigator.of(context).pushNamed(ProductsPage.routeName);
                 }
               },
               child: Container(
                 height: 130,
+                width: 250,
                 decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 10,
@@ -129,9 +132,12 @@ class _WidgetOneState extends State<WidgetOne> {
                     ),
                   ],
                 ),
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage(item.urlImage),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    item.urlImage,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
               ),
             ),
@@ -146,4 +152,67 @@ class _WidgetOneState extends State<WidgetOne> {
           ],
         ),
       );
+}
+
+class BuildCard extends StatefulWidget {
+  final CardCategory item;
+  const BuildCard({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  @override
+  State<BuildCard> createState() => _BuildCardState();
+}
+
+class _BuildCardState extends State<BuildCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 150,
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (widget.item.title == 'Perros') {
+                Navigator.of(context).pushNamed(ProductsPage.routeName);
+              } else if (widget.item.title == 'Gatos') {
+                Navigator.of(context).pushNamed(ProductsPage.routeName);
+              }
+            },
+            child: Container(
+              height: 130,
+              width: 250,
+              decoration: const BoxDecoration(
+                shape: BoxShape.rectangle,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10,
+                    color: Colors.black26,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  widget.item.urlImage,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            ),
+          ),
+          Text(
+            widget.item.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.black87,
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -30,4 +30,10 @@ class BadgesCubit extends Cubit<BadgesState> {
       }
     });
   }
+
+  @override
+  Future<void> close() {
+    shoppingCartSubscription.cancel();
+    return super.close();
+  }
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
-import '../widgets/shop_widgets/bird_category.dart';
 import '../widgets/shop_widgets/cat_category.dart';
 import '../widgets/shop_widgets/dog_category.dart';
-import '../widgets/shop_widgets/smallpet_category.dart';
 
 import '../../constants/app_constants.dart';
 
@@ -66,8 +64,8 @@ class ShopPage extends StatelessWidget {
           children: const [
             DogCategory(),
             CatCategory(),
-            BirdCategory(),
-            SmallPetCategory(),
+            // BirdCategory(),
+            // SmallPetCategory(),
           ],
         ));
   }

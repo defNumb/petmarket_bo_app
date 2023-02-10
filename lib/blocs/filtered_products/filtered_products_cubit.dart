@@ -10,9 +10,7 @@ class FilteredProductsCubit extends Cubit<FilteredProductsState> {
 
   FilteredProductsCubit({
     required this.initialProducts,
-  }) : super(FilteredProductsState(filteredProducts: initialProducts)) {
-    setFilteredProducts(Filter.all, initialProducts, null);
-  }
+  }) : super(FilteredProductsState(filteredProducts: initialProducts));
 
   void setFilteredProducts(Filter filter, List<Product> products, String? searchTerm) {
     List<Product> _filteredProducts;

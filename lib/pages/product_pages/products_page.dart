@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:petmarket_bo_app/blocs/product_filter/product_filter_cubit.dart';
 import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
 import 'package:petmarket_bo_app/blocs/product_search/product_search_cubit.dart';
 import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
+
 import '../../blocs/filtered_products/filtered_products_cubit.dart';
 import '../../constants/app_constants.dart';
 import '../../models/product_model.dart';
-
 import 'product_details.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -23,7 +24,6 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
-  // initialize state of list of products
   @override
   void initState() {
     super.initState();
@@ -32,8 +32,8 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the filtered products from the cubit
     final products = context.watch<FilteredProductsCubit>().state.filteredProducts;
-
     return Scaffold(
       backgroundColor: const Color(0xff068BCA),
       appBar: AppBar(
@@ -55,7 +55,7 @@ class _ProductsPageState extends State<ProductsPage> {
           padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
           child: IconButton(
             onPressed: () {
-              context.read<ProductFilterCubit>().changeFilter(Filter.all);
+              // pop the current page
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back),
@@ -71,6 +71,7 @@ class _ProductsPageState extends State<ProductsPage> {
       ),
       body: MultiBlocListener(
         listeners: [
+          // Listen to product list changes
           BlocListener<ProductListCubit, ProductListState>(
             listener: (context, state) {
               context.read<FilteredProductsCubit>().setFilteredProducts(
@@ -79,15 +80,17 @@ class _ProductsPageState extends State<ProductsPage> {
                   context.read<ProductSearchCubit>().state.searchTerm);
             },
           ),
+          // Listen to product filter changes
           BlocListener<ProductFilterCubit, ProductFilterState>(
             listener: (context, state) {
               context.read<FilteredProductsCubit>().setFilteredProducts(
-                    context.read<ProductFilterCubit>().state.filter,
+                    state.filter,
                     context.read<ProductListCubit>().state.productList,
                     context.read<ProductSearchCubit>().state.searchTerm,
                   );
             },
           ),
+          // Listen to product search changes
           BlocListener<ProductSearchCubit, ProductSearchState>(
             listener: (context, state) {
               context.read<FilteredProductsCubit>().setFilteredProducts(
@@ -107,6 +110,11 @@ class _ProductsPageState extends State<ProductsPage> {
               );
             },
             itemBuilder: (context, index) {
+              // print list status
+              print(context.read<ProductFilterCubit>().state.filter);
+              print(products.length);
+              // print filter status
+              // print search status
               Product? productDocument = products[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),

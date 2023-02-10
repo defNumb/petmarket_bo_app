@@ -50,7 +50,6 @@ class ProductRepository {
     }
   }
 
-  // TODO: get product list by category
   // get product list
   Future<List<Product>> getProductList() async {
     try {
