@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/constants/app_constants.dart';
+
+import '../../constants/app_constants.dart';
 
 class NotificationOptionsPage extends StatefulWidget {
   static String routeName = '/notification_options';

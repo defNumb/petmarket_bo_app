@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/shopping_cart/shopping_cart_bloc.dart';
-import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
 
 import '../../blocs/product_description/product_description_cubit.dart';
+import '../../blocs/shopping_cart/shopping_cart_bloc.dart';
 import '../../constants/app_constants.dart';
 import '../../models/cart_item_model.dart';
 import '../../utils/error_dialog.dart';
+import '../widgets/shopping_cart_icon.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String productId;

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:petmarket_bo_app/blocs/shopping_cart/shopping_cart_bloc.dart';
 
 import '../../models/cart_item_model.dart';
+import '../shopping_cart/shopping_cart_bloc.dart';
 
 part 'badges_state.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
 
 import '../../constants/app_constants.dart';
+import '../widgets/shopping_cart_icon.dart';
 
 class Favorites extends StatefulWidget {
   // path name

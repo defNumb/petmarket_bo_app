@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/pages/profile_pages/account_options.dart';
-import 'package:petmarket_bo_app/pages/profile_pages/my_address.dart';
-import 'package:petmarket_bo_app/pages/profile_pages/purchase_history.dart';
-import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
+import '../profile_pages/account_options.dart';
+import '../profile_pages/my_address.dart';
+import '../profile_pages/purchase_history.dart';
+import '../widgets/shopping_cart_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/profile/profile_cubit.dart';

@@ -29,6 +29,13 @@
             {
               "client_id": "196504032011-0c2bo529l925lonm8nli2n2t88r2p3r6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "196504032011-i048go2ctuuhnh0kk49igs308kji4ihe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.petmarketBoApp"
+              }
             }
           ]
         }

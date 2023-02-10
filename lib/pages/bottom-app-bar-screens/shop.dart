@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
-import '../widgets/shop_widgets/cat_category.dart';
-import '../widgets/shop_widgets/dog_category.dart';
 
 import '../../constants/app_constants.dart';
+import '../widgets/shop_widgets/cat_category.dart';
+import '../widgets/shop_widgets/dog_category.dart';
+import '../widgets/shopping_cart_icon.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({Key? key}) : super(key: key);

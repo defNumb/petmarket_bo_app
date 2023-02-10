@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
 import 'package:petmarket_bo_app/models/cart_item_model.dart';
 import 'package:petmarket_bo_app/repositories/shopping_cart_repository.dart';
 

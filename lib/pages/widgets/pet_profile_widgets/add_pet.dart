@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../blocs/pet_list/pet_list_cubit.dart';
 import '../../../blocs/signup_pet/signup_pet_cubit.dart';
+import '../../../constants/app_constants.dart';
 import '../../../models/pet_model.dart';
 import '../../../utils/error_dialog.dart';
-import '../../../constants/app_constants.dart';
 
 class RegisterPetScreen extends StatefulWidget {
   static const String routeName = '/add_pet';

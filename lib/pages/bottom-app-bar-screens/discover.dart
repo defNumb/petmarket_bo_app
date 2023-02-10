@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
+import '../widgets/shopping_cart_icon.dart';
 
 import '../widgets/discover_widgets/banner_one.dart';
 import '../widgets/discover_widgets/image_slider.dart';

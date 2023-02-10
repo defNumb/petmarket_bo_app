@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../repositories/product_repository.dart';
 
 import '../../models/custom_error.dart';
 import '../../models/product_model.dart';
+import '../../repositories/product_repository.dart';
 
 part 'product_description_state.dart';
 

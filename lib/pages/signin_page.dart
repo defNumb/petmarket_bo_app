@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/signin/signin_cubit.dart';
-import 'signup_page.dart';
-import '../utils/error_dialog.dart';
 import 'package:validators/validators.dart';
 
+import '../blocs/signin/signin_cubit.dart';
 import '../constants/app_constants.dart';
+import '../utils/error_dialog.dart';
+import 'signup_page.dart';
 
 class SigninPage extends StatefulWidget {
   static const String routeName = '/signin';
