@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:petmarket_bo_app/constants/db_constant.dart';
-import 'package:petmarket_bo_app/models/custom_error.dart';
+import '../constants/db_constant.dart';
+import '../models/custom_error.dart';
 
 class AuthRepository {
   final FirebaseFirestore firebaseFirestore;

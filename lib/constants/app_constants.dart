@@ -102,6 +102,7 @@ List<String> bigKind = [
 
 // SETTINGS
 const boxContainerColor = Colors.white70;
+const appbarColor = const Color.fromARGB(255, 26, 134, 223);
 const primaryColor = Color(0xff068BCA);
 const fontColor = Colors.white;
 const fontType = 'Quicksand';

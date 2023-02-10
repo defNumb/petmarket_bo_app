@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/banner_one.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/image_slider.dart';
-import 'package:petmarket_bo_app/pages/widgets/discover_widgets/widget_one.dart';
+import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
+
+import '../widgets/discover_widgets/banner_one.dart';
+import '../widgets/discover_widgets/image_slider.dart';
+import '../widgets/discover_widgets/widget_one.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({Key? key}) : super(key: key);
@@ -29,12 +31,8 @@ class DiscoverPage extends StatelessWidget {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_cart),
-                iconSize: 30,
-              ),
+              padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
+              child: shoppingCartIcon(context),
             )
           ],
           // bottom: PreferredSize(

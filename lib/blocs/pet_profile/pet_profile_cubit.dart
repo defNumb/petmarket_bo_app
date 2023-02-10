@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:petmarket_bo_app/models/custom_error.dart';
-import 'package:petmarket_bo_app/models/pet_model.dart';
-import 'package:petmarket_bo_app/models/user_model.dart';
-import 'package:petmarket_bo_app/repositories/pet_repository.dart';
-import 'package:petmarket_bo_app/repositories/profile_repository.dart';
+import '../../models/custom_error.dart';
+import '../../models/pet_model.dart';
+import '../../models/user_model.dart';
+import '../../repositories/pet_repository.dart';
+import '../../repositories/profile_repository.dart';
 
 part 'pet_profile_state.dart';
 

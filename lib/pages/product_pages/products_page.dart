@@ -1,15 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
-import 'package:petmarket_bo_app/pages/product_pages/product_details.dart';
-import 'package:petmarket_bo_app/utils/error_dialog.dart';
 
+import 'package:petmarket_bo_app/blocs/product_filter/product_filter_cubit.dart';
+import 'package:petmarket_bo_app/blocs/product_list/product_list_cubit.dart';
+import 'package:petmarket_bo_app/blocs/product_search/product_search_cubit.dart';
+import 'package:petmarket_bo_app/pages/widgets/shopping_cart_icon.dart';
+
+import '../../blocs/filtered_products/filtered_products_cubit.dart';
 import '../../constants/app_constants.dart';
 import '../../models/product_model.dart';
+import 'product_details.dart';
 
 class ProductsPage extends StatefulWidget {
   static const String routeName = '/products';
-  const ProductsPage({super.key});
+
+  const ProductsPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProductsPage> createState() => _ProductsPageState();
@@ -19,15 +27,13 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   void initState() {
     super.initState();
-    _getProducts();
-  }
-
-  void _getProducts() async {
-    await context.read<ProductListCubit>().getProductList();
+    context.read<ProductListCubit>().getProductList();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Get the filtered products from the cubit
+    final products = context.watch<FilteredProductsCubit>().state.filteredProducts;
     return Scaffold(
       backgroundColor: const Color(0xff068BCA),
       appBar: AppBar(
@@ -49,30 +55,67 @@ class _ProductsPageState extends State<ProductsPage> {
           padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
           child: IconButton(
             onPressed: () {
+              // pop the current page
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back),
             iconSize: 30,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
+            child: shoppingCartIcon(context),
+          ),
+        ],
       ),
-      body: BlocConsumer<ProductListCubit, ProductListState>(
-        listener: (context, state) {
-          if (state.listStatus == ProductListStatus.error) {
-            errorDialog(context, state.error);
-            ;
-          }
-        },
-        builder: (context, state) {
-          if (state.listStatus == ProductListStatus.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return ListView.builder(
-            itemCount: state.productList.length,
+      body: MultiBlocListener(
+        listeners: [
+          // Listen to product list changes
+          BlocListener<ProductListCubit, ProductListState>(
+            listener: (context, state) {
+              context.read<FilteredProductsCubit>().setFilteredProducts(
+                  context.read<ProductFilterCubit>().state.filter,
+                  state.productList,
+                  context.read<ProductSearchCubit>().state.searchTerm);
+            },
+          ),
+          // Listen to product filter changes
+          BlocListener<ProductFilterCubit, ProductFilterState>(
+            listener: (context, state) {
+              context.read<FilteredProductsCubit>().setFilteredProducts(
+                    state.filter,
+                    context.read<ProductListCubit>().state.productList,
+                    context.read<ProductSearchCubit>().state.searchTerm,
+                  );
+            },
+          ),
+          // Listen to product search changes
+          BlocListener<ProductSearchCubit, ProductSearchState>(
+            listener: (context, state) {
+              context.read<FilteredProductsCubit>().setFilteredProducts(
+                    context.read<ProductFilterCubit>().state.filter,
+                    context.read<ProductListCubit>().state.productList,
+                    state.searchTerm,
+                  );
+            },
+          ),
+        ],
+        child: ListView.separated(
+            itemCount: products.length,
+            separatorBuilder: (context, index) {
+              return const Divider(
+                height: 0,
+                thickness: 0,
+              );
+            },
             itemBuilder: (context, index) {
-              Product productDocument = state.productList[index];
+              // print list status
+              print(context.read<ProductFilterCubit>().state.filter);
+              print(products.length);
+              // print filter status
+              // print search status
+              Product? productDocument = products[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
@@ -106,7 +149,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 20.0),
+                                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                       child: Image.network(
                                         productDocument.image,
                                         frameBuilder:
@@ -126,14 +169,14 @@ class _ProductsPageState extends State<ProductsPage> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                        left: 50,
+                                        left: 40,
                                       ),
                                       child: Column(
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(0, 20, 65, 0),
                                             child: Text(
-                                              "Bs.${productDocument.price.first} - Bs.${productDocument.price.last}",
+                                              "Desde Bs. ${productDocument.price}",
                                               style: const TextStyle(
                                                   fontFamily: "QuickSand",
                                                   color: Color.fromARGB(255, 205, 42, 30),
@@ -159,7 +202,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(0, 0, 30, 20),
                                             child: Text(
-                                              "${productDocument.weight.length.toString()} tamaños, 1 sabor",
+                                              " tamaños, 1 sabor",
                                               style: const TextStyle(
                                                   fontFamily: "QuickSand", color: Colors.black),
                                             ),
@@ -187,9 +230,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   ),
                 ),
               );
-            },
-          );
-        },
+            }),
       ),
     );
   }

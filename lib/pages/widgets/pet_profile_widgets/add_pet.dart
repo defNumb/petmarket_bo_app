@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/pet_list/pet_list_cubit.dart';
-import 'package:petmarket_bo_app/blocs/signup_pet/signup_pet_cubit.dart';
-import 'package:petmarket_bo_app/models/pet_model.dart';
-import 'package:petmarket_bo_app/utils/error_dialog.dart';
+import '../../../blocs/pet_list/pet_list_cubit.dart';
+import '../../../blocs/signup_pet/signup_pet_cubit.dart';
+import '../../../models/pet_model.dart';
+import '../../../utils/error_dialog.dart';
 import '../../../constants/app_constants.dart';
 
 class RegisterPetScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       backgroundImage: _backgroundImage ?? '',
       referenceId: '',
     );
-    context.read<SignupPetCubit>().createPet(pet: newPet);
+    context.read<SignupPetCubit>().createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
     context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
     Navigator.of(context).pop();
   }

@@ -10,6 +10,6 @@ class PetFind extends StatefulWidget {
 class _PetFindState extends State<PetFind> {
   @override
   Widget build(BuildContext context) {
-    return const Text('Hola');
+    return Placeholder();
   }
 }

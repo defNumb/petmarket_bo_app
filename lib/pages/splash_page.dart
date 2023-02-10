@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
-import 'package:petmarket_bo_app/blocs/auth/auth_state.dart';
-import 'package:petmarket_bo_app/pages/home_page.dart';
-import 'package:petmarket_bo_app/pages/signin_page.dart';
+import '../blocs/auth/auth_bloc.dart';
+import '../blocs/auth/auth_state.dart';
+import 'home_page.dart';
+import 'signin_page.dart';
 
 class SplashPage extends StatelessWidget {
   static const String routeName = '/';
