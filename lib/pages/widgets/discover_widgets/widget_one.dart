@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/pages/widgets/shop_widgets/dog_products.dart';
 
 import '../../../blocs/product_filter/product_filter_cubit.dart';
 import '../../../models/product_model.dart';
 import '../../product_pages/products_page.dart';
+import '../shop_widgets/cat_products.dart';
 
 class WidgetOne extends StatefulWidget {
   const WidgetOne({Key? key}) : super(key: key);
@@ -176,9 +178,10 @@ class _BuildCardState extends State<BuildCard> {
           GestureDetector(
             onTap: () {
               if (widget.item.title == 'Perros') {
-                Navigator.of(context).pushNamed(ProductsPage.routeName);
+                // navigate to dog products page using regular navigation
+                Navigator.of(context).pushNamed(DogProducts.routeName);
               } else if (widget.item.title == 'Gatos') {
-                Navigator.of(context).pushNamed(ProductsPage.routeName);
+                Navigator.of(context).pushNamed(CatProducts.routeName);
               }
             },
             child: Container(

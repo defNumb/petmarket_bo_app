@@ -46,8 +46,11 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
 
         cartRepository.addToCart(product);
 
+        // add the new item value to the total
+        double total = state.total + (product.price * event.cartItem.quantity);
+
         // emit the new state
-        emit(state.copyWith(shoppingCart: cartItems));
+        emit(state.copyWith(shoppingCart: cartItems, total: total));
       },
     );
 
@@ -59,11 +62,14 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
         final cartItems = state.shoppingCart;
         // check if the cart item already exists
         cartRepository.removeFromCart(product);
+        // remove the item value from the total
+        double total = state.total - (product.price);
         // emit the new state
-        emit(state.copyWith(shoppingCart: cartItems));
+        emit(state.copyWith(shoppingCart: cartItems, total: total));
       },
     );
   }
+  // GetCartTotalEvent
 
   // This will be used once HydratedBloc is implemented
   @override

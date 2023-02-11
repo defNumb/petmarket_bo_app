@@ -204,4 +204,6 @@ class ShoppingCartRepository {
       );
     }
   }
+
+  // Get list of shopping cart items
 }

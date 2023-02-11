@@ -32,4 +32,77 @@ class ProductListCubit extends Cubit<ProductListState> {
       return [];
     }
   }
+
+  // Get product list by animal
+  Future<void> getProductsByAnimal({required String animal}) async {
+    emit(state.copyWith(listStatus: ProductListStatus.loading));
+    try {
+      final List<Product> products = await productRepository.filterByAnimal(animal: animal);
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.loaded,
+          productList: products,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
+
+  // Filter by term
+  Future<void> searchByAnimalandTerm({required String term, String animal = 'all'}) async {
+    emit(state.copyWith(listStatus: ProductListStatus.loading));
+    try {
+      final List<Product> products = await productRepository.getProductList();
+      final List<Product> filteredProducts = products
+          .where((element) => animal == 'all' ? true : element.animal == animal)
+          .where((element) => element.name.toLowerCase().contains(term.toLowerCase()))
+          .toList();
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.loaded,
+          productList: filteredProducts,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
+
+  // get products by animal and category
+  Future<void> getProductsByAnimalAndCategory({
+    required String animal,
+    required String category,
+  }) async {
+    emit(state.copyWith(listStatus: ProductListStatus.loading));
+    try {
+      final List<Product> products = await productRepository.filterByAnimalAndCategory(
+        animal: animal,
+        category: category,
+      );
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.loaded,
+          productList: products,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          listStatus: ProductListStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }

@@ -181,4 +181,34 @@ class ProductRepository {
       );
     }
   }
+
+  // filter by animal and category
+  Future<List<Product>> filterByAnimalAndCategory(
+      {required String animal, required String category}) async {
+    try {
+      final QuerySnapshot productList = await productsRef
+          .where('animal', isEqualTo: animal)
+          .where('category', isEqualTo: category)
+          .get();
+      if (productList.docs.isNotEmpty) {
+        final productListData =
+            productList.docs.map((productDoc) => Product.fromDoc(productDoc)).toList();
+        return productListData;
+      } else {
+        return [];
+      }
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.filterByAnimalAndCategory',
+      );
+    }
+  }
 }

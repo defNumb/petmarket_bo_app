@@ -40,3 +40,14 @@ class RemoveFromCartEvent extends ShoppingCartBlocEvent {
   @override
   List<Object> get props => [cartItem];
 }
+
+// GetCartTotalEvent
+
+class GetCartTotalEvent extends ShoppingCartBlocEvent {
+  final List<CartItem> cartItems;
+
+  const GetCartTotalEvent({required this.cartItems});
+
+  @override
+  List<Object> get props => [cartItems];
+}

@@ -21,6 +21,7 @@ import 'blocs/signin/signin_cubit.dart';
 import 'blocs/signup/signup_cubit.dart';
 import 'blocs/signup_pet/signup_pet_cubit.dart';
 import 'firebase_options.dart';
+import 'pages/bottom-app-bar-screens/shop.dart';
 import 'pages/home_page.dart';
 import 'pages/product_pages/products_page.dart';
 import 'pages/profile_pages/account_options.dart';
@@ -35,6 +36,8 @@ import 'pages/signin_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/splash_page.dart';
 import 'pages/widgets/pet_profile_widgets/add_pet.dart';
+import 'pages/widgets/shop_widgets/cat_products.dart';
+import 'pages/widgets/shop_widgets/dog_products.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/pet_repository.dart';
 import 'repositories/product_repository.dart';
@@ -186,6 +189,9 @@ class MyApp extends StatelessWidget {
             PaymentMethodPage.routeName: (context) => PaymentMethodPage(),
             AccountOptionsPage.routeName: (context) => AccountOptionsPage(),
             NotificationOptionsPage.routeName: (context) => NotificationOptionsPage(),
+            DogProducts.routeName: (context) => DogProducts(),
+            CatProducts.routeName: (context) => CatProducts(),
+            ShopPage.routeName: (context) => ShopPage(),
           },
         ),
       ),

@@ -153,6 +153,28 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
               });
         },
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(50, 15, 50, 20),
+        child: Container(
+            color: Color.fromARGB(255, 205, 189, 45),
+            height: 55,
+            child: TextButton(
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '  Total: \$${double.parse(context.watch<ShoppingCartBloc>().state.total.toString()).toStringAsFixed(2)}     Comprar',
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(Icons.shopping_cart_checkout_rounded, color: Colors.black),
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

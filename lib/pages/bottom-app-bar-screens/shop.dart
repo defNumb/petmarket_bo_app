@@ -6,6 +6,7 @@ import '../widgets/shop_widgets/dog_category.dart';
 import '../widgets/shopping_cart_icon.dart';
 
 class ShopPage extends StatelessWidget {
+  static const String routeName = '/shop';
   const ShopPage({Key? key}) : super(key: key);
 
   @override

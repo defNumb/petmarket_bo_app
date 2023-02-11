@@ -80,7 +80,10 @@ class _MenuPageState extends State<MenuPage> {
               ),
               // Dog
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  // navigate to dog products page
+                  Navigator.of(context).pushNamed('/dog_products');
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(50, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -112,7 +115,10 @@ class _MenuPageState extends State<MenuPage> {
               const Divider(height: 0, color: Colors.white60),
               //Cat
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  // navigate to cat products page
+                  Navigator.of(context).pushNamed('/cat_products');
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(50, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -144,7 +150,10 @@ class _MenuPageState extends State<MenuPage> {
               const Divider(height: 0, color: Colors.white60),
               // Shop by Pet
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  // navigate to shop page
+                  Navigator.of(context).pushNamed('/shop');
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(50, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,

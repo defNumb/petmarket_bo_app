@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of 'shopping_cart_bloc.dart';
 
 enum ShoppingCartStatus {
@@ -11,11 +12,13 @@ enum ShoppingCartStatus {
 class ShoppingCartState extends Equatable {
   final ShoppingCartStatus cartStatus;
   final List<CartItem> shoppingCart;
+  final double total;
   final CustomError error;
 
   ShoppingCartState({
     required this.cartStatus,
     required this.shoppingCart,
+    required this.total,
     required this.error,
   });
 
@@ -25,11 +28,12 @@ class ShoppingCartState extends Equatable {
       cartStatus: ShoppingCartStatus.initial,
       shoppingCart: [],
       error: CustomError(),
+      total: 0.0,
     );
   }
   // Equatable
   @override
-  List<Object> get props => [cartStatus, shoppingCart, error];
+  List<Object> get props => [cartStatus, shoppingCart, total, error];
 
   // ToString
   @override
@@ -55,11 +59,13 @@ class ShoppingCartState extends Equatable {
   ShoppingCartState copyWith({
     ShoppingCartStatus? cartStatus,
     List<CartItem>? shoppingCart,
+    double? total,
     CustomError? error,
   }) {
     return ShoppingCartState(
       cartStatus: cartStatus ?? this.cartStatus,
       shoppingCart: shoppingCart ?? this.shoppingCart,
+      total: total ?? this.total,
       error: error ?? this.error,
     );
   }
