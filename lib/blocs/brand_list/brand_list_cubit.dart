@@ -29,7 +29,7 @@ class BrandListCubit extends Cubit<BrandListState> {
           error: e,
         ),
       );
-      return [];
+      throw e;
     }
   }
 }

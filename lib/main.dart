@@ -8,6 +8,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
+import 'blocs/brand_list/brand_list_cubit.dart';
 import 'blocs/filtered_products/filtered_products_cubit.dart';
 import 'blocs/pet_list/pet_list_cubit.dart';
 import 'blocs/pet_profile/pet_profile_cubit.dart';
@@ -39,6 +40,7 @@ import 'pages/widgets/pet_profile_widgets/add_pet.dart';
 import 'pages/widgets/shop_widgets/cat_products.dart';
 import 'pages/widgets/shop_widgets/dog_products.dart';
 import 'repositories/auth_repository.dart';
+import 'repositories/brand_repository.dart';
 import 'repositories/pet_repository.dart';
 import 'repositories/product_repository.dart';
 import 'repositories/profile_repository.dart';
@@ -93,6 +95,12 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<ShoppingCartRepository>(
           create: (context) => ShoppingCartRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
+        // brand repository
+        RepositoryProvider<BrandRepository>(
+          create: (context) => BrandRepository(
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         ),
@@ -165,6 +173,11 @@ class MyApp extends StatelessWidget {
           BlocProvider<FilteredProductsCubit>(
             create: (context) => FilteredProductsCubit(
               initialProducts: context.read<ProductListCubit>().state.productList,
+            ),
+          ),
+          BlocProvider<BrandListCubit>(
+            create: (context) => BrandListCubit(
+              brandRepository: context.read<BrandRepository>(),
             ),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/discover_widgets/brands_banner.dart';
 import '../widgets/shopping_cart_icon.dart';
 
 import '../widgets/discover_widgets/banner_one.dart';
@@ -65,6 +66,7 @@ class DiscoverPage extends StatelessWidget {
           const ImageSlider(),
           const BannerOne(),
           const WidgetOne(),
+          const BrandListWidget(),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(

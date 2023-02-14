@@ -35,7 +35,6 @@ class _MyAddressPageState extends State<MyAddressPage> {
           ),
         ],
       ),
-      // TODO: Integrate with Bloc and Repository
       body: noAddress(),
     );
   }
