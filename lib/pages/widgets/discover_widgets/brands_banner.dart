@@ -36,28 +36,20 @@ class _BrandListWidgetState extends State<BrandListWidget> {
       height: 100,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<BrandListCubit, BrandListState>(
-          builder: (context, state) {
-            if (state.status == BrandListStatus.loading) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              return ListView.separated(
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-                scrollDirection: Axis.horizontal,
-                itemCount: state.brands.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 200,
-                    // brand image
-                    child: Image.network(state.brands[index].image),
-                  );
-                },
-              );
-            }
+        child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              width: 0,
+            );
+          },
+          scrollDirection: Axis.horizontal,
+          itemCount: brands.length,
+          itemBuilder: (context, index) {
+            return Container(
+              width: 150,
+              // brand image
+              child: Image.asset(brands[index].image),
+            );
           },
         ),
       ),

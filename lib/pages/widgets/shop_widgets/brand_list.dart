@@ -12,6 +12,8 @@ class BrandListPage extends StatefulWidget {
 class _BrandListPageState extends State<BrandListPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    // Creates a scaffold, which provides a default app bar, title, and a body property that
+    // can hold the widget tree for the home screen. The widget subtree can be quite complex.
+    return Scaffold();
   }
 }
