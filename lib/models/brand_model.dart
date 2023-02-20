@@ -20,7 +20,7 @@ class Brand extends Equatable {
   // from doc
   factory Brand.fromJson(DocumentSnapshot doc) {
     return Brand(
-      name: doc.id,
+      name: doc['name'],
       image: doc['image'],
     );
   }

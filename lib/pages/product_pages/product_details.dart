@@ -284,11 +284,14 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       ),
                       onPressed: () {
                         CartItem cartItem = CartItem(
-                            id: state.product.id,
-                            name: state.product.name,
-                            price: state.product.price,
-                            quantity: 1,
-                            image: state.product.image);
+                          id: state.product.id,
+                          name: state.product.name,
+                          price: state.product.price,
+                          quantity: 1,
+                          image: state.product.image,
+                          weight: state.product.weight,
+                          stock: state.product.stock,
+                        );
                         print(cartItem);
                         context.read<ShoppingCartBloc>().add(AddToCartEvent(cartItem: cartItem));
                       },

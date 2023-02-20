@@ -89,6 +89,8 @@ class ShoppingCartRepository {
           'price': product.price,
           'quantity': 1,
           'image': product.image,
+          'weight': product.weight,
+          'stock': product.stock,
         });
       }
     } on FirebaseException catch (e) {
@@ -204,6 +206,4 @@ class ShoppingCartRepository {
       );
     }
   }
-
-  // Get list of shopping cart items
 }

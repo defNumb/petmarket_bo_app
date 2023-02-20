@@ -7,14 +7,18 @@ class CartItem extends Equatable {
   final String name;
   final String image;
   late final int quantity;
+  final double weight;
   final double price;
+  final int stock;
 
   CartItem({
     required this.id,
     required this.name,
     required this.image,
     required this.quantity,
+    required this.weight,
     required this.price,
+    required this.stock,
   });
 
   //
@@ -27,6 +31,8 @@ class CartItem extends Equatable {
       image: json['image'],
       quantity: json['quantity'],
       price: json['price'],
+      weight: json['weight'],
+      stock: json['stock'],
     );
   }
 
@@ -38,6 +44,8 @@ class CartItem extends Equatable {
       image: '',
       quantity: 0,
       price: 0.0,
+      weight: 0.0,
+      stock: 0,
     );
   }
   // To convert a CartItem from a Map.
@@ -60,6 +68,8 @@ class CartItem extends Equatable {
       image: cartItemData['image'] ?? '',
       quantity: cartItemData['quantity'] ?? 0,
       price: cartItemData['price'].toDouble() ?? 0.0,
+      weight: cartItemData['weight'].toDouble() ?? 0.0,
+      stock: cartItemData['stock'] ?? 0,
     );
   }
 
@@ -71,6 +81,8 @@ class CartItem extends Equatable {
       image: cartItem.image,
       quantity: cartItem.quantity,
       price: cartItem.price,
+      weight: cartItem.weight,
+      stock: cartItem.stock,
     };
   }
 
@@ -81,7 +93,9 @@ class CartItem extends Equatable {
       name,
       image,
       quantity,
+      weight,
       price,
+      stock,
     ];
   }
 
