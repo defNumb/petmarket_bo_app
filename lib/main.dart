@@ -8,6 +8,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
+import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'blocs/brand_list/brand_list_cubit.dart';
 import 'blocs/filtered_products/filtered_products_cubit.dart';
 import 'blocs/pet_list/pet_list_cubit.dart';
@@ -179,6 +180,9 @@ class MyApp extends StatelessWidget {
             create: (context) => BrandListCubit(
               brandRepository: context.read<BrandRepository>(),
             ),
+          ),
+          BlocProvider<BottomNavBarCubit>(
+            create: (context) => BottomNavBarCubit(),
           ),
         ],
         child: MaterialApp(

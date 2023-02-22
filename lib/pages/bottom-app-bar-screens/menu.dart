@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import '../widgets/shopping_cart_icon.dart';
 
 const primaryColor = Color(0xff068BCA);
@@ -151,8 +153,9 @@ class _MenuPageState extends State<MenuPage> {
               // Shop by Pet
               InkWell(
                 onTap: () {
+                  context.read<BottomNavBarCubit>().switchNavBarItem(BottomNavBarItem.shop);
                   // navigate to shop page
-                  Navigator.of(context).pushNamed('/shop');
+                  Navigator.of(context).pushNamed('/home');
                 },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(50, 15, 0, 5),

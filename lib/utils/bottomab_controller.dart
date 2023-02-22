@@ -25,42 +25,43 @@ class _BottomNavigationBarControllerState extends State<BottomNavigationBarContr
   int _selectedIndex = 0;
 
   Widget _bottomNavigationBar(int selectedIndex) => BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromARGB(255, 9, 80, 138),
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white70,
-          unselectedFontSize: 12,
-          selectedFontSize: 15,
-          showUnselectedLabels: false,
-          onTap: (int index) => setState(() => _selectedIndex = index),
-          currentIndex: selectedIndex,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.pets),
-              label: 'Descubre',
-              //backgroundColor: Color.fromARGB(255, 9, 80, 138),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.storefront),
-              label: 'Tienda',
-              //backgroundColor: Color.fromARGB(255, 9, 80, 138),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on),
-              label: 'PetFind',
-              //backgroundColor: Color.fromARGB(255, 9, 80, 138),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Mi Cuenta',
-              //backgroundColor: Color.fromARGB(255, 9, 80, 138),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.menu),
-              label: 'Menu',
-              //backgroundColor: Color.fromARGB(255, 9, 80, 138),
-            ),
-          ]);
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color.fromARGB(255, 9, 80, 138),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        unselectedFontSize: 12,
+        selectedFontSize: 15,
+        showUnselectedLabels: false,
+        onTap: (int index) => setState(() => _selectedIndex = index),
+        currentIndex: selectedIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pets),
+            label: 'Descubre',
+            //backgroundColor: Color.fromARGB(255, 9, 80, 138),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.storefront),
+            label: 'Tienda',
+            //backgroundColor: Color.fromARGB(255, 9, 80, 138),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: 'PetFind',
+            //backgroundColor: Color.fromARGB(255, 9, 80, 138),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Mi Cuenta',
+            //backgroundColor: Color.fromARGB(255, 9, 80, 138),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            label: 'Menu',
+            //backgroundColor: Color.fromARGB(255, 9, 80, 138),
+          ),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
