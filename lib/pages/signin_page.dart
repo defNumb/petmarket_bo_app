@@ -144,7 +144,36 @@ class _SigninPageState extends State<SigninPage> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 20.0),
+                          // Continuar como invitado
+                          const SizedBox(height: 20.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'continuar como invitado',
+                                style: TextStyle(
+                                  fontFamily: fontType,
+                                  fontSize: 13,
+                                  color: fontColor,
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, SignupPage.routeName);
+                                },
+                                child: const Text(
+                                  'PULSA AQUÍ',
+                                  style: TextStyle(
+                                    fontFamily: fontType,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: fontColor,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           //Nuevo Usuario? Registrate Ahora!
                           const SizedBox(height: 50),
                           Row(

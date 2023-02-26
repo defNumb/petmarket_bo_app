@@ -85,6 +85,25 @@ class AuthRepository {
     }
   }
 
+  // anonymous sign in method
+  Future<void> anonymousSignin() async {
+    try {
+      await firebaseAuth.signInAnonymously();
+    } on fbAuth.FirebaseAuthException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.anonymousSignin',
+      );
+    }
+  }
+
   // Sign out method
   Future<void> signout() async {
     await firebaseAuth.signOut();
