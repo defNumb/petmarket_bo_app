@@ -159,7 +159,7 @@ class _SigninPageState extends State<SigninPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, SignupPage.routeName);
+                                  context.read<SigninCubit>().anonSignin();
                                 },
                                 child: const Text(
                                   'PULSA AQUÍ',

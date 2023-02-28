@@ -9,6 +9,8 @@ import 'package:petmarket_bo_app/repositories/shopping_cart_repository.dart';
 import '../../models/custom_error.dart';
 import '../../models/product_model.dart';
 import '../../repositories/product_repository.dart';
+import '../auth/auth_bloc.dart';
+import '../auth/auth_state.dart';
 
 part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
@@ -17,16 +19,26 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
   late final StreamSubscription cartSubscription;
   final ShoppingCartRepository cartRepository;
   final ProductRepository productRepository;
+  final AuthBloc authBloc;
 
-  ShoppingCartBloc({
-    required this.cartRepository,
-    required this.productRepository,
-  }) : super(ShoppingCartState.initial()) {
+  ShoppingCartBloc(
+      {required this.cartRepository, required this.productRepository, required this.authBloc})
+      : super(ShoppingCartState.initial()) {
     // subscribe to the cart stream
-    cartSubscription = cartRepository.cartItemStream.listen((cartItem) {
-      add(GetCartEvent(cartItems: cartItem));
-    });
-
+    cartSubscription = cartRepository.cartItemStream.listen(
+      (cartItem) {
+        add(GetCartEvent(cartItems: cartItem));
+      },
+    );
+    // Subscribe to the auth bloc
+    authBloc.stream.listen(
+      (state) {
+        if (state.authStatus == AuthStatus.unauthenticated) {
+          // CANCEL THE SUBSCRIPTION
+          cartSubscription.cancel();
+        }
+      },
+    );
     // GetCartEvent
     on<GetCartEvent>(
       (event, emit) {
@@ -84,7 +96,6 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
         emit(state.copyWith(total: total));
       },
     );
-    // SetProductAmountEvent
   }
 
   // This will be used once HydratedBloc is implemented

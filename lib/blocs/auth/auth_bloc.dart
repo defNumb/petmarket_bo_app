@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthStateChangedEvent>((event, emit) {
       if (event.user != null) {
+        print(event.user!.isAnonymous);
         emit(
           state.copyWith(
             authStatus: AuthStatus.authenticated,

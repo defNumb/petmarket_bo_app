@@ -158,6 +158,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ShoppingCartBloc(
               cartRepository: context.read<ShoppingCartRepository>(),
               productRepository: context.read<ProductRepository>(),
+              authBloc: context.read<AuthBloc>(),
             ),
           ),
           BlocProvider<BadgesCubit>(

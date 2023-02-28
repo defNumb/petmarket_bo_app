@@ -27,4 +27,24 @@ class SigninCubit extends Cubit<SigninState> {
       );
     }
   }
+
+  // Anon signin
+  Future<void> anonSignin() async {
+    emit(state.copyWith(signinStatus: SigninStatus.submitting));
+    try {
+      await authRepository.anonymousSignin();
+      emit(
+        state.copyWith(
+          signinStatus: SigninStatus.success,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          signinStatus: SigninStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }
