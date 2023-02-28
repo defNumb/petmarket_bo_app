@@ -40,9 +40,6 @@ class _SigninPopupState extends State<SigninPopup> {
       },
       builder: (context, state) {
         return Container(
-          // height and width equal to media query
-          height: MediaQuery.of(context).size.height * 0.90,
-          width: MediaQuery.of(context).size.width,
           // rounded top corners and green color
           decoration: BoxDecoration(
             color: Colors.blue[100],
@@ -60,6 +57,8 @@ class _SigninPopupState extends State<SigninPopup> {
               autovalidateMode: _autoValidateMode,
               child: Column(
                 children: [
+                  // sized box
+                  SizedBox(height: 20.0),
                   // email field
                   TextFormField(
                     focusNode: myFocusNode,
@@ -113,16 +112,17 @@ class _SigninPopupState extends State<SigninPopup> {
                       _password = value;
                     },
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 30.0),
                   // sign in button
                   InkWell(
                     onTap: state.signinStatus == SigninStatus.submitting ? null : _submit,
                     child: Column(
                       children: [
-                        Ink.image(
-                          image: const AssetImage('assets/images/paw2.png'),
-                          height: 74,
-                          width: 72,
+                        // asset image
+                        Image.asset(
+                          'assets/images/paw2.png',
+                          height: 50,
+                          width: 50,
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -133,7 +133,7 @@ class _SigninPopupState extends State<SigninPopup> {
                             fontFamily: fontType,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            color: fontColor,
+                            color: Color.fromARGB(255, 5, 31, 53),
                           ),
                         ),
                       ],

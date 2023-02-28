@@ -104,6 +104,57 @@ class AuthRepository {
     }
   }
 
+  // Convert anonymous user to permanent user
+  Future<void> convertAnonymousUser({
+    required String name,
+    required String lastName,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      // Get current user
+      final fbAuth.User? currentUser = firebaseAuth.currentUser;
+
+      // credential
+      final fbAuth.AuthCredential credential = fbAuth.EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
+      // Create user in firebase auth
+      final fbAuth.UserCredential userCredential =
+          await currentUser!.linkWithCredential(credential);
+
+      final signedInUser = userCredential.user!;
+
+      // Create user in firestore AFTER user is created in firebase auth
+      await usersRef.doc(signedInUser.uid).set(
+        {
+          'id': signedInUser.uid,
+          'name': name,
+          'last_name': lastName,
+          'email': email,
+          'point': 0,
+          'rank': 'Bronze',
+          'phoneNumber': '',
+          'dateJoined': DateTime.now().toString(),
+        },
+      );
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
   // Sign out method
   Future<void> signout() async {
     await firebaseAuth.signOut();

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
 import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
@@ -184,6 +185,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<BottomNavBarCubit>(
             create: (context) => BottomNavBarCubit(),
+          ),
+          BlocProvider<SignupInSwitchCubit>(
+            create: (context) => SignupInSwitchCubit(),
           ),
         ],
         child: MaterialApp(

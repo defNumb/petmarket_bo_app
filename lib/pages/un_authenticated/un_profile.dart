@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:petmarket_bo_app/constants/app_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../signin_popup.dart';
+
 class UnauthProfile extends StatelessWidget {
   const UnauthProfile({super.key});
 
@@ -138,7 +140,18 @@ class UnauthProfile extends StatelessWidget {
               // MY INFO
               // Mis mascotas
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,

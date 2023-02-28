@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/discover.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/menu.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/shop.dart';
 import 'package:petmarket_bo_app/pages/map_pages/placeholder.dart';
+import 'package:petmarket_bo_app/pages/widgets/signup-in-switch.dart';
 
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/auth/auth_state.dart';
 import '../blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'bottom-app-bar-screens/profile.dart';
 import 'signin_popup.dart';
+import 'signup_popup.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
@@ -65,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                             // button to sign in
                             TextButton(
                               onPressed: () {
+                                context.read<SignupInSwitchCubit>().switchToSignin();
                                 showModalBottomSheet<dynamic>(
                                   backgroundColor: Colors.transparent,
                                   isScrollControlled: true,
@@ -72,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) {
                                     return Wrap(
                                       children: <Widget>[
-                                        const SigninPopup(),
+                                        const SignSwitcher(),
                                       ],
                                     );
                                   },
@@ -94,7 +98,21 @@ class _HomePageState extends State<HomePage> {
                             ),
                             // button to sign up
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<SignupInSwitchCubit>().switchToSignup();
+                                showModalBottomSheet<dynamic>(
+                                  backgroundColor: Colors.transparent,
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return Wrap(
+                                      children: <Widget>[
+                                        const SignSwitcher(),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                               child: const Text(
                                 'Registrarse',
                                 style: TextStyle(
