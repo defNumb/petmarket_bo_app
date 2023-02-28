@@ -16,7 +16,8 @@ class SplashPage extends StatelessWidget {
       listener: ((context, state) {
         if (state.authStatus == AuthStatus.unauthenticated) {
           Navigator.of(context).pushNamed(SigninPage.routeName);
-        } else if (state.authStatus == AuthStatus.authenticated) {
+        } else if (state.authStatus == AuthStatus.authenticated ||
+            state.authStatus == AuthStatus.anonymous) {
           Navigator.of(context).pushNamed(HomePage.routeName);
         }
       }),

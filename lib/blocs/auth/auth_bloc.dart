@@ -18,28 +18,42 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       add(AuthStateChangedEvent(user: user));
     });
 
-    on<AuthStateChangedEvent>((event, emit) {
-      if (event.user != null) {
-        print(event.user!.isAnonymous);
-        emit(
-          state.copyWith(
-            authStatus: AuthStatus.authenticated,
-            user: event.user,
-          ),
-        );
-      } else {
-        emit(
-          state.copyWith(
-            authStatus: AuthStatus.unauthenticated,
-            user: null,
-          ),
-        );
-      }
-    });
+    on<AuthStateChangedEvent>(
+      (event, emit) {
+        if (event.user != null) {
+          print(event.user!.isAnonymous);
+          // Check if the user is anonymous
+          if (event.user!.isAnonymous) {
+            emit(
+              state.copyWith(
+                authStatus: AuthStatus.anonymous,
+                user: event.user,
+              ),
+            );
+          } else {
+            emit(
+              state.copyWith(
+                authStatus: AuthStatus.authenticated,
+                user: event.user,
+              ),
+            );
+          }
+        } else {
+          emit(
+            state.copyWith(
+              authStatus: AuthStatus.unauthenticated,
+              user: null,
+            ),
+          );
+        }
+      },
+    );
 
     // Create a signout event
-    on<SignoutRequestedEvent>((event, emit) async {
-      await authRepository.signout();
-    });
+    on<SignoutRequestedEvent>(
+      (event, emit) async {
+        await authRepository.signout();
+      },
+    );
   }
 }

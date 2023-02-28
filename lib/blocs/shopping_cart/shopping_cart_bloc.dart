@@ -33,7 +33,8 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
     // Subscribe to the auth bloc
     authBloc.stream.listen(
       (state) {
-        if (state.authStatus == AuthStatus.unauthenticated) {
+        if (state.authStatus == AuthStatus.unauthenticated ||
+            state.authStatus == AuthStatus.anonymous) {
           // CANCEL THE SUBSCRIPTION
           cartSubscription.cancel();
         }

@@ -6,7 +6,7 @@ enum AuthStatus {
   unknown,
   authenticated,
   unauthenticated,
-  annonymous,
+  anonymous,
 }
 
 class AuthState extends Equatable {
