@@ -6,13 +6,10 @@ import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/menu.dart';
 import 'package:petmarket_bo_app/pages/bottom-app-bar-screens/shop.dart';
 import 'package:petmarket_bo_app/pages/map_pages/placeholder.dart';
 import 'package:petmarket_bo_app/pages/widgets/signup-in-switch.dart';
-
 import '../blocs/auth/auth_bloc.dart';
 import '../blocs/auth/auth_state.dart';
 import '../blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'bottom-app-bar-screens/profile.dart';
-import 'signin_popup.dart';
-import 'signup_popup.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';

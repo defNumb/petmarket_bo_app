@@ -26,7 +26,6 @@ class _BrandListWidgetState extends State<BrandListWidget> {
   Widget build(BuildContext context) {
     // return a column with two rows of two buttons each for each of the brands
     final brands = context.watch<BrandListCubit>().state.brands;
-    print(brands);
     return BlocBuilder<BrandListCubit, BrandListState>(
       builder: (context, state) {
         if (state.status == BrandListStatus.loaded) {

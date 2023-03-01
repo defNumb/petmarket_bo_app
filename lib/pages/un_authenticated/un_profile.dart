@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/constants/app_constants.dart';
+import 'package:petmarket_bo_app/pages/widgets/signup-in-switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../signin_popup.dart';
+import '../../blocs/signup-in-switch/signup_in_switch_cubit.dart';
 
 class UnauthProfile extends StatelessWidget {
   const UnauthProfile({super.key});
@@ -141,13 +143,16 @@ class UnauthProfile extends StatelessWidget {
               // Mis mascotas
               InkWell(
                 onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
                   showModalBottomSheet<dynamic>(
                     backgroundColor: Colors.transparent,
                     isScrollControlled: true,
                     context: context,
                     builder: (context) {
                       return Wrap(
-                        children: <Widget>[],
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
                       );
                     },
                   );
@@ -190,7 +195,21 @@ class UnauthProfile extends StatelessWidget {
               const Divider(height: 0, color: Colors.white60),
               // Historial de Compras
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -229,7 +248,21 @@ class UnauthProfile extends StatelessWidget {
               const Divider(height: 0, color: Colors.white60),
               // Mis Favoritos
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -268,7 +301,21 @@ class UnauthProfile extends StatelessWidget {
               const Divider(height: 0, color: Colors.white60),
               // Metodos de Pago
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -307,7 +354,21 @@ class UnauthProfile extends StatelessWidget {
               const Divider(height: 0, color: Colors.white60),
               // Direcciones
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,
@@ -363,7 +424,21 @@ class UnauthProfile extends StatelessWidget {
               ),
               // Account Settings
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<SignupInSwitchCubit>().switchToSignin();
+                  showModalBottomSheet<dynamic>(
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) {
+                      return Wrap(
+                        children: <Widget>[
+                          const SignSwitcher(),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
                   width: MediaQuery.of(context).size.width,

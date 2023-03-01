@@ -38,33 +38,57 @@ class _SignSwitcherState extends State<SignSwitcher> {
             color: Color.fromARGB(255, 61, 61, 61),
             thickness: 2,
           ),
+          //sized box
+          SizedBox(
+            height: 10,
+          ),
           // row with two buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Sign in button
-              TextButton(
-                onPressed: () {
-                  context.read<SignupInSwitchCubit>().switchToSignin();
-                },
-                child: Text(
-                  'Sign in',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
+              Container(
+                // round edges
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.blue[200],
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    context.read<SignupInSwitchCubit>().switchToSignin();
+                  },
+                  child: Text(
+                    'Sign in',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
+              //sized box
+              SizedBox(
+                width: 20,
+              ),
               // Sign up button
-              TextButton(
-                onPressed: () {
-                  context.read<SignupInSwitchCubit>().switchToSignup();
-                },
-                child: Text(
-                  'Sign up',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
+              Container(
+                // round edges
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.blue[200],
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    context.read<SignupInSwitchCubit>().switchToSignup();
+                  },
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),

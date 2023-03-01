@@ -80,8 +80,10 @@ class _UserProfileState extends State<UserProfile> {
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
           if (state.authStatus == AuthStatus.anonymous) {
+            // Unauthenticated profile
             return UnauthProfile();
           }
+          // Authenticated profile
           return BlocConsumer<ProfileCubit, ProfileState>(
             listener: (context, state) {
               if (state.profileStatus == ProfileStatus.error) {

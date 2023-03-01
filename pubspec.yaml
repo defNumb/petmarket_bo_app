@@ -29,7 +29,7 @@ dependencies:
 
 flutter_native_splash:
   color: "#428bca"
-  image: assets/images/petmarketlogo_2.png
+  image: assets/images/petmarket_logo.png
   android: true
   ios: true
   web: false
