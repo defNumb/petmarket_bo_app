@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/pages/un_authenticated/un_profile.dart';
@@ -12,7 +13,7 @@ import '../../blocs/profile/profile_cubit.dart';
 import '../profile_pages/favorites.dart';
 import '../profile_pages/my_pets.dart';
 import '../../utils/error_dialog.dart';
-
+import 'package:intl/intl.dart';
 import '../../constants/app_constants.dart';
 import '../profile_pages/notifications.dart';
 import '../profile_pages/payment_methods.dart';
@@ -91,6 +92,15 @@ class _UserProfileState extends State<UserProfile> {
               }
             },
             builder: (context, state) {
+              // joined date
+              String joinedDate = state.user.dateJoined;
+              // format dateJoined
+              var _formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+              // conver dateJoined to DateTime
+              final DateTime joined = _formatter.parse(joinedDate);
+              // format joined date to YYYY-MM-DD
+              final String joinedFormated = DateFormat('yyyy-MM-dd').format(joined);
+
               if (state.profileStatus == ProfileStatus.initial) {
                 return Container();
               } else if (state.profileStatus == ProfileStatus.loading) {
@@ -128,7 +138,7 @@ class _UserProfileState extends State<UserProfile> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(8, 0, 0, 15),
                             child: Text(
-                              'Usuario desde: ${state.user.dateJoined} ',
+                              'Usuario desde: ${joinedFormated} ',
                               style: const TextStyle(
                                 fontFamily: "Quicksand",
                                 fontWeight: FontWeight.bold,
