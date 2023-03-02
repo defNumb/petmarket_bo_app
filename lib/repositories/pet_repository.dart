@@ -22,7 +22,9 @@ class PetRepository {
       });
 
   // Get pet profile
-  Future<Pet> getPetProfile({required String uid, required String pid}) async {
+  Future<Pet> getPetProfile({required String pid}) async {
+    // get current user id
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     try {
       final DocumentSnapshot petDoc = await usersRef.doc(uid).collection('pets').doc(pid).get();
       if (petDoc.exists) {

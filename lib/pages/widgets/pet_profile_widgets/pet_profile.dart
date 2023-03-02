@@ -14,14 +14,14 @@ class _PetProfileState extends State<PetProfile> {
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
 
-  Image backgroundImage = Image.asset('images/wallpaper.png');
+  Image backgroundImage = Image.asset('assets/images/wallpaper.png');
 
   @override
   void initState() {
     super.initState();
-    // if (widget.pet.background != "") {
-    //   backgroundImage = Image.network(widget.pet.background);
-    // }
+    if (widget.pet.backgroundImage != "") {
+      backgroundImage = Image.network(widget.pet.backgroundImage);
+    }
   }
 
   @override
@@ -118,7 +118,7 @@ class _PetProfileState extends State<PetProfile> {
                     Padding(
                       padding: EdgeInsets.fromLTRB((width / 2) - 35, 120, 30, 15),
                       child: CircleAvatar(
-                        backgroundColor: Colors.red,
+                        backgroundColor: Color.fromARGB(255, 54, 165, 244),
                         radius: 35,
                         child: Container(
                           height: 50,
@@ -154,13 +154,11 @@ class _PetProfileState extends State<PetProfile> {
                 padding: const EdgeInsets.fromLTRB(15, 25, 0, 25),
                 child: IntrinsicHeight(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       //
                       // Breed
-                      const SizedBox(
-                        width: 15,
-                      ),
                       Column(
                         children: [
                           const Text(
