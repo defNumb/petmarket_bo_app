@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:petmarket_bo_app/pages/widgets/pet_profile_widgets/pet_profile.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/pet_list/pet_list_cubit.dart';
@@ -110,7 +111,14 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
               return Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PetProfile(pet: petDocument),
+                      ),
+                    );
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(

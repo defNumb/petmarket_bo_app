@@ -132,7 +132,6 @@ class MyApp extends StatelessWidget {
           BlocProvider<PetProfileCubit>(
             create: (context) => PetProfileCubit(
               petRepository: context.read<PetRepository>(),
-              profileRepository: context.read<ProfileRepository>(),
             ),
           ),
           BlocProvider<PetListCubit>(

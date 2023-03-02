@@ -92,15 +92,6 @@ class _UserProfileState extends State<UserProfile> {
               }
             },
             builder: (context, state) {
-              // joined date
-              String joinedDate = state.user.dateJoined;
-              // format dateJoined
-              var _formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
-              // conver dateJoined to DateTime
-              final DateTime joined = _formatter.parse(joinedDate);
-              // format joined date to YYYY-MM-DD
-              final String joinedFormated = DateFormat('yyyy-MM-dd').format(joined);
-
               if (state.profileStatus == ProfileStatus.initial) {
                 return Container();
               } else if (state.profileStatus == ProfileStatus.loading) {
@@ -112,6 +103,15 @@ class _UserProfileState extends State<UserProfile> {
                   child: Text('Oops! try again!'),
                 );
               }
+              // joined date
+              String joinedDate = state.user.dateJoined;
+              // format dateJoined
+              var _formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+              // conver dateJoined to DateTime
+              final DateTime joined = _formatter.parse(joinedDate);
+              // format joined date to YYYY-MM-DD
+              final String joinedFormated = DateFormat('yyyy-MM-dd').format(joined);
+
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
