@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:petmarket_bo_app/blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
+import 'package:petmarket_bo_app/repositories/favorite_repository.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
 import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
@@ -106,6 +108,11 @@ class MyApp extends StatelessWidget {
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         ),
+        RepositoryProvider<FavoriteRepository>(
+          create: (context) => FavoriteRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        )
       ],
       child: MultiBlocProvider(
         providers: [
@@ -187,6 +194,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<SignupInSwitchCubit>(
             create: (context) => SignupInSwitchCubit(),
+          ),
+          BlocProvider<FavoriteBadgeCubit>(
+            create: (context) => FavoriteBadgeCubit(
+              favoriteRepository: context.read<FavoriteRepository>(),
+            ),
           ),
         ],
         child: MaterialApp(
