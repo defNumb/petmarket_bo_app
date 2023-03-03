@@ -1,10 +1,13 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/favorite_badge/favorite_badge_cubit.dart';
 import '../../blocs/product_description/product_description_cubit.dart';
 import '../../blocs/shopping_cart/shopping_cart_bloc.dart';
 import '../../constants/app_constants.dart';
 import '../../models/cart_item_model.dart';
+import '../../models/favorite_model.dart';
 import '../../utils/error_dialog.dart';
 import '../widgets/shopping_cart_icon.dart';
 
@@ -28,10 +31,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void initState() {
     super.initState();
     _getProductDescription();
+    _checkIfProductIsFavorite();
   }
 
   void _getProductDescription() async {
     await context.read<ProductDescriptionCubit>().getProductDescription(pid: widget.productId);
+  }
+
+  void _checkIfProductIsFavorite() async {
+    await context.read<FavoriteBadgeCubit>().checkFavorite(id: widget.productId);
   }
 
   @override
@@ -121,51 +129,29 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   ),
 
                   // LIKE BUTTON
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(300, 15, 0, 15),
-                  //   child: FavoriteButton(
-                  //     iconSize: 50,
-                  //     valueChanged: (favorited) async {
-                  //       if (favorited) {
-                  //         await firebaseStore
-                  //             .collection('users')
-                  //             .doc(firebaseAuth.currentUser!.uid)
-                  //             .collection('favorites')
-                  //             .doc(widget.productId)
-                  //             .get()
-                  //             .then((snapshot) async {
-                  //           if (snapshot.exists) {
-                  //             await firebaseStore
-                  //                 .collection('users')
-                  //                 .doc(firebaseAuth.currentUser!.uid)
-                  //                 .collection('favorites')
-                  //                 .doc(widget.productId)
-                  //                 .update({
-                  //               "productId": product.id,
-                  //             });
-                  //           } else {
-                  //             await firebaseStore
-                  //                 .collection('users')
-                  //                 .doc(uid)
-                  //                 .collection('favorites')
-                  //                 .doc(widget.productId)
-                  //                 .set({
-                  //               "productId": product.id,
-                  //             });
-                  //           }
-                  //         });
-                  //       } else {
-                  //         await firebaseStore
-                  //             .collection('users')
-                  //             .doc(uid)
-                  //             .collection('favorites')
-                  //             .doc(widget.productId)
-                  //             .delete();
-                  //       }
-                  //     },
-                  //     isFavorite: widget.isFav,
-                  //   ),
-                  // ),
+                  BlocBuilder<FavoriteBadgeCubit, FavoriteBadgeState>(
+                    builder: (context, state) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(300, 15, 0, 15),
+                        child: FavoriteButton(
+                          iconSize: 50,
+                          valueChanged: (favorited) async {
+                            if (favorited) {
+                              await context
+                                  .read<FavoriteBadgeCubit>()
+                                  .addFavorite(favorite: Favorite(id: widget.productId));
+                            } else {
+                              await context
+                                  .read<FavoriteBadgeCubit>()
+                                  .removeFavorite(id: widget.productId);
+                            }
+                          },
+                          isFavorite: state.favorited,
+                        ),
+                      );
+                    },
+                  ),
+
                   // PRODUCT TITLE
                   Text(
                     state.product.name,

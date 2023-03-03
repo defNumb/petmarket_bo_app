@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import '../../constants/app_constants.dart';
 import '../widgets/shopping_cart_icon.dart';
 
@@ -47,47 +49,50 @@ class _FavoritesState extends State<Favorites> {
           ),
         ],
       ),
-      body: noFavorites(),
-    );
-  }
-}
-
-Widget noFavorites() => Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'No tienes favoritos!, Utiliza ',
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'No tienes favoritos!, Utiliza ',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                ),
               ),
-            ),
-            Icon(
-              Icons.favorite,
-              color: Colors.grey,
-            ),
-          ],
-        ),
-        const Text('cuando veas un producto que te gusta en nuestra tienda'),
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: TextButton(
-            onPressed: () {},
-            child: Container(
-              height: 50,
-              width: 250,
-              color: Colors.blue,
-              child: const Center(
-                child: Text(
-                  'Visita nuestra tienda',
-                  style: TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
+              Icon(
+                Icons.favorite,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+          const Text('cuando veas un producto que te gusta en nuestra tienda'),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: TextButton(
+              onPressed: () {
+                // change the state of the bottom nav bar
+                context.read<BottomNavBarCubit>().switchNavBarItem(BottomNavBarItem.shop);
+                // navigate to shop page
+                Navigator.of(context).pushNamed('/home');
+              },
+              child: Container(
+                height: 50,
+                width: 250,
+                color: Colors.blue,
+                child: const Center(
+                  child: Text(
+                    'Visita nuestra tienda',
+                    style: TextStyle(color: Colors.white, fontFamily: 'Quicksand'),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
+  }
+}
