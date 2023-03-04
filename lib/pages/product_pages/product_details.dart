@@ -143,7 +143,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             } else {
                               await context
                                   .read<FavoriteBadgeCubit>()
-                                  .removeFavorite(id: widget.productId);
+                                  .removeFavorite(widget.productId);
                             }
                           },
                           isFavorite: state.favorited,

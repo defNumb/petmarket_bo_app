@@ -32,7 +32,7 @@ class FavoriteBadgeCubit extends Cubit<FavoriteBadgeState> {
   }
 
   // remove favorite
-  Future<void> removeFavorite({required String id}) async {
+  Future<void> removeFavorite(String id) async {
     try {
       // remove favorite from firebase
       await favoriteRepository.deleteFavorite(fid: id);

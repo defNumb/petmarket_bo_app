@@ -13,6 +13,7 @@ import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
 import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'blocs/brand_list/brand_list_cubit.dart';
+import 'blocs/favorite_list/favorite_list_cubit.dart';
 import 'blocs/filtered_products/filtered_products_cubit.dart';
 import 'blocs/pet_list/pet_list_cubit.dart';
 import 'blocs/pet_profile/pet_profile_cubit.dart';
@@ -197,6 +198,11 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<FavoriteBadgeCubit>(
             create: (context) => FavoriteBadgeCubit(
+              favoriteRepository: context.read<FavoriteRepository>(),
+            ),
+          ),
+          BlocProvider<FavoriteListCubit>(
+            create: (context) => FavoriteListCubit(
               favoriteRepository: context.read<FavoriteRepository>(),
             ),
           ),

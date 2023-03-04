@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../constants/db_constant.dart';
 import '../models/custom_error.dart';
 import '../models/favorite_model.dart';
+import '../models/product_model.dart';
 
 class FavoriteRepository {
   final FirebaseFirestore firebaseFirestore;
@@ -22,8 +23,9 @@ class FavoriteRepository {
       });
 
   // Get favorite list
-  Future<List<Favorite>> getFavoriteList({required String uid}) async {
+  Future<List<Favorite>> getFavoriteList() async {
     try {
+      final uid = FirebaseAuth.instance.currentUser!.uid;
       final QuerySnapshot favoriteList = await usersRef.doc(uid).collection('favorites').get();
       if (favoriteList.docs.isNotEmpty) {
         final favoriteListData =
@@ -138,6 +140,34 @@ class FavoriteRepository {
         code: 'Exception',
         message: e.toString(),
         plugin: 'flutter_error/server_error.isFavorite',
+      );
+    }
+  }
+
+  // Get a list o products from favorite list, where the favorite id matches the product id
+  // This is used to display the favorite products in the favorite screen
+  Future<List<Product>> getFavoriteProducts(List<Favorite> favoriteList) async {
+    try {
+      final List<Product> favoriteProducts = [];
+      for (final favorite in favoriteList) {
+        final DocumentSnapshot productDoc = await productsRef.doc(favorite.id).get();
+        if (productDoc.exists) {
+          final Product favoriteProduct = Product.fromDoc(productDoc);
+          favoriteProducts.add(favoriteProduct);
+        }
+      }
+      return favoriteProducts;
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error.getFavoriteProducts',
       );
     }
   }
