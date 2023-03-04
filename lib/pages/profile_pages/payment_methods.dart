@@ -41,46 +41,48 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
 }
 
 Widget noFormsOfPayment() {
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(height: 20),
-        const Text(
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(height: 20),
+      Center(
+        child: const Text(
           'No tienes ningún método de pago agregado',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
+            fontFamily: 'Quicksand',
           ),
         ),
-        const SizedBox(height: 20),
-        const Text(
-          'Añade un método de pago para poder realizar tus pedidos',
-          style: TextStyle(
-            fontSize: 15,
-          ),
+      ),
+      const SizedBox(height: 20),
+      const Text(
+        'Añade un método de pago para poder realizar tus pedidos',
+        style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'Quicksand',
         ),
-        const SizedBox(height: 20),
-        Container(
-          width: 200,
-          height: 50,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text(
-              'Añadir Método de Pago',
-              style: TextStyle(
-                fontSize: 15,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: appbarColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
+      ),
+      const SizedBox(height: 20),
+      Container(
+        width: 200,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: () {},
+          child: const Text(
+            'Añadir Método de Pago',
+            style: TextStyle(
+              fontSize: 15,
             ),
           ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: appbarColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
         ),
-      ],
-    ),
+      ),
+    ],
   );
 }

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../models/custom_error.dart';
 import '../../models/product_model.dart';
 import '../../repositories/product_repository.dart';

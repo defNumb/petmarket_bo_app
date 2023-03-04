@@ -41,31 +41,33 @@ class _MyAddressPageState extends State<MyAddressPage> {
 }
 
 Widget noAddress() {
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(height: 20),
-        const Text(
-          'No tienes ninguna dirección agregada',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(height: 20),
+      const Text(
+        'No tienes ninguna dirección agregada',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Quicksand',
         ),
-        const SizedBox(height: 20),
-        const Text(
+      ),
+      const SizedBox(height: 20),
+      Center(
+        child: const Text(
           'Añade una dirección para poder realizar tus pedidos',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
+            fontFamily: 'Quicksand',
           ),
         ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Agregar dirección'),
-        ),
-      ],
-    ),
+      ),
+      const SizedBox(height: 20),
+      ElevatedButton(
+        onPressed: () {},
+        child: const Text('Agregar dirección'),
+      ),
+    ],
   );
 }
