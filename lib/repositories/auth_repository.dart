@@ -159,4 +159,120 @@ class AuthRepository {
   Future<void> signout() async {
     await firebaseAuth.signOut();
   }
+
+  // Delete user method
+  Future<void> deleteUserAccount() async {
+    try {
+      // Get current user
+      final fbAuth.User? currentUser = firebaseAuth.currentUser;
+
+      // Delete user in firebase auth
+      await currentUser!.delete();
+
+      // Delete user in firestore AFTER user is deleted in firebase auth
+      await usersRef.doc(currentUser.uid).delete();
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  // Update user email
+  Future<void> updateEmail(String email) async {
+    try {
+      // Get current user
+      final fbAuth.User? currentUser = firebaseAuth.currentUser;
+      // Update user email in firebase auth
+      await currentUser!.updateEmail(email);
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  // Update user password
+  Future<void> updatePassword(String password) async {
+    try {
+      // Get current user
+      final fbAuth.User? currentUser = firebaseAuth.currentUser;
+      // Update user password in firebase auth
+      await currentUser!.updatePassword(password);
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  // Forgot password method
+  Future<void> forgotPassword(String email) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
+
+  // verify email
+  Future<void> verifyEmail() async {
+    try {
+      // Get current user
+      final fbAuth.User? currentUser = firebaseAuth.currentUser;
+      // Update user password in firebase auth
+      await currentUser!.sendEmailVerification();
+    } on fbAuth.FirebaseAuthException catch (e) {
+      // HANDLE ERROR
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

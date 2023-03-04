@@ -31,4 +31,37 @@ class ProfileCubit extends Cubit<ProfileState> {
       );
     }
   }
+
+  // update user info
+  Future<void> updateProfile(
+    String uid,
+    String name,
+    String lastName,
+    String phoneNumber,
+  ) async {
+    emit(state.copyWith(profileStatus: ProfileStatus.loading));
+    try {
+      await profileRepository.updateProfile(
+        uid,
+        name,
+        lastName,
+        phoneNumber,
+      );
+      // get updated user
+      final User user = await profileRepository.getProfile(uid: uid);
+      emit(
+        state.copyWith(
+          profileStatus: ProfileStatus.loaded,
+          user: user,
+        ),
+      );
+    } on CustomError catch (e) {
+      emit(
+        state.copyWith(
+          profileStatus: ProfileStatus.error,
+          error: e,
+        ),
+      );
+    }
+  }
 }

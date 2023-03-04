@@ -55,5 +55,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await authRepository.signout();
       },
     );
+
+    // Create a delete account event
+    on<DeleteAccountRequestedEvent>(
+      (event, emit) async {
+        await authRepository.deleteUserAccount();
+      },
+    );
   }
 }

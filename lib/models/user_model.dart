@@ -31,11 +31,11 @@ class User extends Equatable {
     return User(
       id: userDoc.id,
       name: userData!['name'] ?? '',
-      lastName: userData['lastName'] ?? '',
+      lastName: userData['last_name'] ?? '',
       email: userData['email'] ?? '',
       point: userData['point'] ?? 0,
       rank: userData['rank'] ?? '',
-      phoneNumber: userData['phoneNumber'] ?? '',
+      phoneNumber: userData['phone'] ?? '',
       dateJoined: userData['dateJoined'] ?? '',
     );
   }
