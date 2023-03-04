@@ -32,4 +32,32 @@ class ProfileRepository {
       );
     }
   }
+
+  // update user info
+  Future<void> updateProfile(
+    String uid,
+    String name,
+    String lastName,
+    String phoneNumber,
+  ) async {
+    try {
+      await usersRef.doc(uid).update({
+        'name': name,
+        'last_name': lastName,
+        'phone': phoneNumber,
+      });
+    } on FirebaseException catch (e) {
+      throw CustomError(
+        code: e.code,
+        message: e.message!,
+        plugin: e.plugin,
+      );
+    } catch (e) {
+      throw CustomError(
+        code: 'Exception',
+        message: e.toString(),
+        plugin: 'flutter_error/server_error',
+      );
+    }
+  }
 }

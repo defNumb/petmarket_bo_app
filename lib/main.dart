@@ -9,6 +9,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:petmarket_bo_app/blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
 import 'package:petmarket_bo_app/repositories/favorite_repository.dart';
+import 'blocs/add_address/add_address_cubit.dart';
+import 'blocs/address_list/address_list_cubit.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
 import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
@@ -41,9 +43,11 @@ import 'pages/shopping_cart_page.dart';
 import 'pages/signin_page.dart';
 import 'pages/signup_page.dart';
 import 'pages/splash_page.dart';
+import 'pages/widgets/add_address.dart';
 import 'pages/widgets/pet_profile_widgets/add_pet.dart';
 import 'pages/widgets/shop_widgets/cat_products.dart';
 import 'pages/widgets/shop_widgets/dog_products.dart';
+import 'repositories/address_repository.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/brand_repository.dart';
 import 'repositories/pet_repository.dart';
@@ -113,7 +117,12 @@ class MyApp extends StatelessWidget {
           create: (context) => FavoriteRepository(
             firebaseFirestore: FirebaseFirestore.instance,
           ),
-        )
+        ),
+        RepositoryProvider<AddressRepository>(
+          create: (context) => AddressRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -206,6 +215,16 @@ class MyApp extends StatelessWidget {
               favoriteRepository: context.read<FavoriteRepository>(),
             ),
           ),
+          BlocProvider<AddAddressCubit>(
+            create: (context) => AddAddressCubit(
+              addressRepository: context.read<AddressRepository>(),
+            ),
+          ),
+          BlocProvider<AddressListCubit>(
+            create: (context) => AddressListCubit(
+              addressRepository: context.read<AddressRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp(
           title: 'Pet Market App',
@@ -231,6 +250,7 @@ class MyApp extends StatelessWidget {
             DogProducts.routeName: (context) => DogProducts(),
             CatProducts.routeName: (context) => CatProducts(),
             ShopPage.routeName: (context) => ShopPage(),
+            AddAddressPage.routeName: (context) => AddAddressPage(),
           },
         ),
       ),

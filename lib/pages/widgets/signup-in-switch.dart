@@ -59,10 +59,10 @@ class _SignSwitcherState extends State<SignSwitcher> {
                     context.read<SignupInSwitchCubit>().switchToSignin();
                   },
                   child: Text(
-                    'Inicio de sesión',
+                    'Iniciar sesión',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -87,7 +87,7 @@ class _SignSwitcherState extends State<SignSwitcher> {
                     'Registro',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 14,
                     ),
                   ),
                 ),

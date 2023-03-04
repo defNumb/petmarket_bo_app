@@ -34,10 +34,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
     setState(() {
       _autoValidateMode = AutovalidateMode.always;
     });
-    print('works here');
     final form = _formKey.currentState;
     if (form == null || !form.validate()) {
-      print('Form is invalid');
       return;
     }
 
@@ -57,7 +55,9 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
       backgroundImage: _backgroundImage ?? '',
       referenceId: '',
     );
-    context.read<SignupPetCubit>().createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
+    context
+        .read<SignupPetCubit>()
+        .createPet(pet: newPet, uid: FirebaseAuth.instance.currentUser!.uid);
     context.read<PetListCubit>().updatePetList(uid: FirebaseAuth.instance.currentUser!.uid);
     Navigator.of(context).pop();
   }
