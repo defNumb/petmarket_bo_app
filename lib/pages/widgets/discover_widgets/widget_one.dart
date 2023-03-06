@@ -111,13 +111,11 @@ class _WidgetOneState extends State<WidgetOne> {
                 if (item.title == 'Perros') {
                   // Change filter to perro
                   context.watch<ProductFilterCubit>().changeFilter(Filter.perro);
-                  print(context.read<ProductFilterCubit>().state);
                   // Navigate to products pae using route name
                   Navigator.of(context).pushNamed(ProductsPage.routeName);
                 } else if (item.title == 'Gatos') {
                   // get product list
                   context.watch<ProductFilterCubit>().changeFilter(Filter.gato);
-                  print(context.read<ProductFilterCubit>().state);
                   Navigator.of(context).pushNamed(ProductsPage.routeName);
                 }
               },

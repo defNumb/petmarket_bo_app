@@ -22,4 +22,12 @@ class SignoutRequestedEvent extends AuthEvent {}
 
 // delete account
 
-class DeleteAccountRequestedEvent extends AuthEvent {}
+class DeleteAccountRequestedEvent extends AuthEvent {
+  final String password;
+  DeleteAccountRequestedEvent({
+    required this.password,
+  });
+
+  @override
+  List<Object?> get props => [password];
+}

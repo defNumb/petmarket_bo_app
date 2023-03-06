@@ -12,6 +12,38 @@ class WarningPopUp extends StatefulWidget {
 }
 
 class _WarningPopUpState extends State<WarningPopUp> {
+  // form key
+  final _formKey = GlobalKey<FormState>();
+  //auto validate mode disabled
+  AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
+  // password controller
+  final _passwordController = TextEditingController();
+
+  @override
+  //initialize
+  void initState() {
+    super.initState();
+  }
+
+  // verify password is correct and submit form to delete account
+  void _submitForm() {
+    setState(() {
+      _autoValidateMode = AutovalidateMode.always;
+    });
+
+    final form = _formKey.currentState;
+    // if form is valid
+    if (form == null || !form.validate()) {
+      return;
+    }
+    form.save();
+    context.read<AuthBloc>().add(
+          DeleteAccountRequestedEvent(
+            password: _passwordController.text,
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
@@ -73,6 +105,44 @@ class _WarningPopUpState extends State<WarningPopUp> {
                   SizedBox(
                     height: 10,
                   ),
+                  // text to ask user to verify password
+                  Container(
+                    child: Text(
+                      'Por favor ingresa tu contraseña para eliminar tu cuenta',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // form to verify password
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 5, 16, 16),
+                    child: Form(
+                      key: _formKey,
+                      autovalidateMode: _autoValidateMode,
+                      child: Column(
+                        children: [
+                          // password field
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: 'Contraseña',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor ingresa tu contraseña';
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   // button to delete account
                   Container(
                     child: TextButton(
@@ -81,8 +151,7 @@ class _WarningPopUpState extends State<WarningPopUp> {
                         backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
                       onPressed: () {
-                        // delete account
-                        context.read<AuthBloc>().add(DeleteAccountRequestedEvent());
+                        _submitForm();
                       },
                       child: Text(
                         'Eliminar cuenta',

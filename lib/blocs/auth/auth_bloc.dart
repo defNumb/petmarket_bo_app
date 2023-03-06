@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthStateChangedEvent>(
-      (event, emit) {
+      (event, emit) async {
         if (event.user != null) {
           print(event.user!.isAnonymous);
           // Check if the user is anonymous
@@ -59,7 +59,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Create a delete account event
     on<DeleteAccountRequestedEvent>(
       (event, emit) async {
-        await authRepository.deleteUserAccount();
+        await authRepository.deleteUserAccount(event.password);
+        // emit new state
+        emit(
+          state.copyWith(
+            authStatus: AuthStatus.unauthenticated,
+            user: null,
+          ),
+        );
       },
     );
   }
