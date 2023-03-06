@@ -72,8 +72,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               ),
             ),
           ),
-          body: // form to register an address
-              Form(
+          body: Form(
             key: _formKey,
             autovalidateMode: _autoValidateMode,
             child: ListView(

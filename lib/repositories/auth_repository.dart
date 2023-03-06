@@ -44,6 +44,14 @@ class AuthRepository {
         'rank': 'Bronze',
         'phoneNumber': '',
         'dateJoined': DateTime.now().toString(),
+        'emailVerified': false,
+        'phoneVerified': false,
+        'isSubscribed': false,
+        'location': GeoPoint(0, 0),
+        'orderNotification': false,
+        'promotionNotification': false,
+        'postNotification': false,
+        'isOnline': false,
       });
     } on fbAuth.FirebaseAuthException catch (e) {
       // HANDLE ERROR

@@ -8,6 +8,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:petmarket_bo_app/blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
+import 'package:petmarket_bo_app/pages/widgets/add_fop.dart';
 import 'package:petmarket_bo_app/repositories/favorite_repository.dart';
 import 'blocs/add_address/add_address_cubit.dart';
 import 'blocs/address_list/address_list_cubit.dart';
@@ -251,6 +252,7 @@ class MyApp extends StatelessWidget {
             CatProducts.routeName: (context) => CatProducts(),
             ShopPage.routeName: (context) => ShopPage(),
             AddAddressPage.routeName: (context) => AddAddressPage(),
+            AddFopPage.routeName: (context) => AddFopPage(),
           },
         ),
       ),

@@ -29,18 +29,20 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/add_fop');
+            },
             icon: const Icon(Icons.add),
             iconSize: 30,
           ),
         ],
       ),
-      body: noFormsOfPayment(),
+      body: noFormsOfPayment(context),
     );
   }
 }
 
-Widget noFormsOfPayment() {
+Widget noFormsOfPayment(context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
@@ -68,7 +70,9 @@ Widget noFormsOfPayment() {
         width: 200,
         height: 50,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/add_fop');
+          },
           child: const Text(
             'Añadir Método de Pago',
             style: TextStyle(
