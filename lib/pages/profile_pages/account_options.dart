@@ -42,6 +42,15 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
       rank: BlocProvider.of<ProfileCubit>(context).state.user.rank,
       phoneNumber: _phoneNumber ?? BlocProvider.of<ProfileCubit>(context).state.user.phoneNumber,
       dateJoined: BlocProvider.of<ProfileCubit>(context).state.user.dateJoined,
+      emailVerified: BlocProvider.of<ProfileCubit>(context).state.user.emailVerified,
+      phoneVerified: BlocProvider.of<ProfileCubit>(context).state.user.phoneVerified,
+      isSubscribed: BlocProvider.of<ProfileCubit>(context).state.user.isSubscribed,
+      location: BlocProvider.of<ProfileCubit>(context).state.user.location,
+      orderNotification: BlocProvider.of<ProfileCubit>(context).state.user.orderNotification,
+      promotionNotification:
+          BlocProvider.of<ProfileCubit>(context).state.user.promotionNotification,
+      postNotification: BlocProvider.of<ProfileCubit>(context).state.user.postNotification,
+      isOnline: BlocProvider.of<ProfileCubit>(context).state.user.isOnline,
     );
     // update user info
     BlocProvider.of<ProfileCubit>(context).updateProfile(

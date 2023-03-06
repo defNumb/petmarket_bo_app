@@ -9,9 +9,17 @@ class User extends Equatable {
   final String lastName;
   final String email;
   final int point;
-  final String rank;
+  final String rank; // find use for rank at a later date
   final String phoneNumber;
   final String dateJoined;
+  final bool emailVerified;
+  final bool phoneVerified;
+  final bool isSubscribed;
+  final GeoPoint location;
+  final bool orderNotification;
+  final bool promotionNotification;
+  final bool postNotification;
+  final bool isOnline;
 
   User({
     required this.id,
@@ -22,6 +30,14 @@ class User extends Equatable {
     required this.rank,
     required this.phoneNumber,
     required this.dateJoined,
+    required this.emailVerified,
+    required this.phoneVerified,
+    required this.isSubscribed,
+    required this.location,
+    required this.orderNotification,
+    required this.promotionNotification,
+    required this.postNotification,
+    required this.isOnline,
   });
 
   // Factory constructor to retrieve information from firebase
@@ -37,6 +53,14 @@ class User extends Equatable {
       rank: userData['rank'] ?? '',
       phoneNumber: userData['phone'] ?? '',
       dateJoined: userData['dateJoined'] ?? '',
+      emailVerified: userData['emailVerified'] ?? false,
+      phoneVerified: userData['phoneVerified'] ?? false,
+      isSubscribed: userData['isSubscribed'] ?? false,
+      location: userData['location'] ?? GeoPoint(0, 0),
+      orderNotification: userData['orderNotification'] ?? false,
+      promotionNotification: userData['promotionNotification'] ?? false,
+      postNotification: userData['postNotification'] ?? false,
+      isOnline: userData['isOnline'] ?? false,
     );
   }
 
@@ -51,6 +75,14 @@ class User extends Equatable {
       rank: '',
       phoneNumber: '',
       dateJoined: '',
+      emailVerified: false,
+      phoneVerified: false,
+      isSubscribed: false,
+      location: GeoPoint(0, 0),
+      orderNotification: false,
+      promotionNotification: false,
+      postNotification: false,
+      isOnline: false,
     );
   }
 
@@ -66,12 +98,20 @@ class User extends Equatable {
       rank,
       phoneNumber,
       dateJoined,
+      emailVerified,
+      phoneVerified,
+      isSubscribed,
+      location,
+      orderNotification,
+      promotionNotification,
+      postNotification,
+      isOnline,
     ];
   }
 
   // toString method
   @override
   String toString() {
-    return 'User ( id: $id, name: $name, lastName: $lastName, email: $email, point: $point, rank: $rank, phoneNumber: $phoneNumber, dateJoined: $dateJoined)';
+    return 'User ( id: $id, name: $name, lastName: $lastName, email: $email, point: $point, rank: $rank, phoneNumber: $phoneNumber, dateJoined: $dateJoined, emailVerified: $emailVerified, phoneVerified: $phoneVerified, isSubscribed: $isSubscribed, location: $location, orderNotification: $orderNotification, promotionNotification: $promotionNotification, postNotification: $postNotification, isOnline: $isOnline)';
   }
 }
