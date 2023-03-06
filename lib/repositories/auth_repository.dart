@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
+import 'package:petmarket_bo_app/blocs/auth/auth_bloc.dart';
 
 import '../constants/db_constant.dart';
 import '../models/custom_error.dart';
@@ -161,16 +162,24 @@ class AuthRepository {
   }
 
   // Delete user method
-  Future<void> deleteUserAccount() async {
+  Future<void> deleteUserAccount(String password) async {
     try {
       // Get current user
       final fbAuth.User? currentUser = firebaseAuth.currentUser;
+      // get credential
+      final fbAuth.AuthCredential credential = fbAuth.EmailAuthProvider.credential(
+        email: currentUser!.email!,
+        password: password,
+      );
 
-      // Delete user in firebase auth
-      await currentUser!.delete();
-
-      // Delete user in firestore AFTER user is deleted in firebase auth
-      await usersRef.doc(currentUser.uid).delete();
+      // re-authenticate user and then delete
+      await currentUser.reauthenticateWithCredential(credential).then(
+        (value) {
+          // Delete user in firestore
+          usersRef.doc(value.user!.uid).delete();
+          value.user!.delete();
+        },
+      );
     } on fbAuth.FirebaseAuthException catch (e) {
       // HANDLE ERROR
       throw CustomError(
@@ -182,18 +191,29 @@ class AuthRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.deleteUserAccount',
       );
     }
   }
 
   // Update user email
-  Future<void> updateEmail(String email) async {
+  Future<void> updateEmail(String newEmail, String password) async {
     try {
       // Get current user
       final fbAuth.User? currentUser = firebaseAuth.currentUser;
-      // Update user email in firebase auth
-      await currentUser!.updateEmail(email);
+      // Re-authenticate user and then update email
+      await currentUser!
+          .reauthenticateWithCredential(
+        fbAuth.EmailAuthProvider.credential(
+          email: currentUser.email!,
+          password: password,
+        ),
+      )
+          .then(
+        (value) {
+          value.user!.updateEmail(newEmail);
+        },
+      );
     } on fbAuth.FirebaseAuthException catch (e) {
       // HANDLE ERROR
       throw CustomError(
@@ -205,7 +225,7 @@ class AuthRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.updateEmail',
       );
     }
   }

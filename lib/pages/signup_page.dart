@@ -68,14 +68,22 @@ class _SignupPageState extends State<SignupPage> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      SizedBox(height: 50.0),
                       Image.asset(
                         'assets/images/petmarketlogo.png',
-                        height: 250.0,
-                        width: 250.0,
+                        height: 200.0,
+                        width: 200.0,
+                      ),
+                      // WELCOME TEXT
+                      Text(
+                        'Bienvenido! Por favor rellene los siguientes campos para registrarse',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: fontType),
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 20.0),
-
                       // Nombre
                       TextFormField(
                         decoration: InputDecoration(

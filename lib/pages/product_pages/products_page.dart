@@ -109,9 +109,6 @@ class _ProductsPageState extends State<ProductsPage> {
               );
             },
             itemBuilder: (context, index) {
-              // print list status
-              print(context.read<ProductFilterCubit>().state.filter);
-              print(products.length);
               // print filter status
               // print search status
               Product? productDocument = products[index];

@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../blocs/filtered_products/filtered_products_cubit.dart';
+import '../../../blocs/product_list/product_list_cubit.dart';
+import '../../../blocs/product_search/product_search_cubit.dart';
+import '../../../models/product_model.dart';
+import '../../product_pages/products_page.dart';
 
 class DogCategory extends StatelessWidget {
   const DogCategory({Key? key}) : super(key: key);
@@ -38,7 +45,9 @@ class DogCategory extends StatelessWidget {
                 width: double.infinity,
                 child: Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/dog_products');
+                    },
                     child: const Padding(
                       padding: EdgeInsets.fromLTRB(140, 30, 0, 0),
                       child: Text(
@@ -132,7 +141,14 @@ class DogCategory extends StatelessWidget {
                         color: Colors.lightBlue,
                       ),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          context.read<FilteredProductsCubit>().setFilteredProducts(
+                                Filter.accessories,
+                                context.read<ProductListCubit>().state.productList,
+                                context.read<ProductSearchCubit>().state.searchTerm,
+                              );
+                          Navigator.pushNamed(context, ProductsPage.routeName);
+                        },
                         child: Center(
                           child: Text(
                             "ACCESSORIOS",
