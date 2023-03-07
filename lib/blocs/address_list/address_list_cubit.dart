@@ -66,4 +66,30 @@ class AddressListCubit extends Cubit<AddressListState> {
       ));
     }
   }
+
+  // update address list
+  Future<void> updateAddressList() async {
+    emit(state.copyWith(status: AddressListStatus.loading));
+    try {
+      var addressList = await addressRepository.getAddressList();
+      emit(state.copyWith(
+        status: AddressListStatus.success,
+        addresses: addressList,
+      ));
+    } on CustomError catch (e) {
+      emit(state.copyWith(
+        status: AddressListStatus.error,
+        error: e,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: AddressListStatus.error,
+        error: CustomError(
+          code: 'Exception',
+          message: e.toString(),
+          plugin: 'flutter_error/server_error.updateAddressList',
+        ),
+      ));
+    }
+  }
 }

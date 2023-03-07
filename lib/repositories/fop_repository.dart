@@ -8,16 +8,18 @@ import '../models/custom_error.dart';
 
 class FopRepository {
   final FirebaseFirestore firebaseFirestore;
+
   FopRepository({
     required this.firebaseFirestore,
   });
 
   // Get fop list
-  Future<List<String>> getFopList({required String uid}) async {
+  Future<List<FormOfPayment>> getFopList({required String uid}) async {
     try {
+      // get current user id
       final QuerySnapshot fopList = await usersRef.doc(uid).collection('fop').get();
       if (fopList.docs.isNotEmpty) {
-        final fopListData = fopList.docs.map((fopDoc) => fopDoc.id).toList();
+        final fopListData = fopList.docs.map((fopDoc) => FormOfPayment.fromDoc(fopDoc)).toList();
         return fopListData;
       } else {
         return [];
@@ -64,17 +66,20 @@ class FopRepository {
   // add fop
   Future<void> addFop(FormOfPayment formOfPayment) async {
     // get current user id
-    final uid = FirebaseAuth.instance.currentUser!.uid;
     try {
+      final uid = FirebaseAuth.instance.currentUser!.uid;
       final fopDoc = await usersRef.doc(uid).collection('fop');
       var randomId = fopDoc.doc();
-      await randomId.set({
-        'fopId': randomId.id,
-        'cardName': formOfPayment.cardName,
-        'cardNumber': formOfPayment.cardNumber,
-        'cardExpirationDate': formOfPayment.cardExpirationDate,
-        'cardCvv': formOfPayment.cardCvv,
-      });
+      await fopDoc.doc(randomId.id).set(
+        {
+          'fopId': randomId.id,
+          'cardName': formOfPayment.cardName,
+          'cardNumber': formOfPayment.cardNumber,
+          'cardExpirationDate': formOfPayment.cardExpirationDate,
+          'cardCcv': formOfPayment.cardCcv,
+          'cardType': formOfPayment.cardType.toString(),
+        },
+      );
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,

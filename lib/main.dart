@@ -11,6 +11,7 @@ import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.d
 import 'package:petmarket_bo_app/pages/widgets/add_fop.dart';
 import 'package:petmarket_bo_app/repositories/favorite_repository.dart';
 import 'blocs/add_address/add_address_cubit.dart';
+import 'blocs/add_fop/add_fop_cubit.dart';
 import 'blocs/address_list/address_list_cubit.dart';
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/badges/badges_cubit.dart';
@@ -18,6 +19,7 @@ import 'blocs/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'blocs/brand_list/brand_list_cubit.dart';
 import 'blocs/favorite_list/favorite_list_cubit.dart';
 import 'blocs/filtered_products/filtered_products_cubit.dart';
+import 'blocs/fop_list/fop_list_cubit.dart';
 import 'blocs/pet_list/pet_list_cubit.dart';
 import 'blocs/pet_profile/pet_profile_cubit.dart';
 import 'blocs/product_description/product_description_cubit.dart';
@@ -51,6 +53,7 @@ import 'pages/widgets/shop_widgets/dog_products.dart';
 import 'repositories/address_repository.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/brand_repository.dart';
+import 'repositories/fop_repository.dart';
 import 'repositories/pet_repository.dart';
 import 'repositories/product_repository.dart';
 import 'repositories/profile_repository.dart';
@@ -121,6 +124,11 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<AddressRepository>(
           create: (context) => AddressRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
+        RepositoryProvider<FopRepository>(
+          create: (context) => FopRepository(
             firebaseFirestore: FirebaseFirestore.instance,
           ),
         ),
@@ -224,6 +232,17 @@ class MyApp extends StatelessWidget {
           BlocProvider<AddressListCubit>(
             create: (context) => AddressListCubit(
               addressRepository: context.read<AddressRepository>(),
+            ),
+          ),
+          //add fop cubit
+          BlocProvider<AddFopCubit>(
+            create: (context) => AddFopCubit(
+              fopRepository: context.read<FopRepository>(),
+            ),
+          ),
+          BlocProvider<FopListCubit>(
+            create: (context) => FopListCubit(
+              fopRepository: context.read<FopRepository>(),
             ),
           ),
         ],

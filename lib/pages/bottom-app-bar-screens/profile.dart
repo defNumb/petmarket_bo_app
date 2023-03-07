@@ -103,7 +103,8 @@ class _UserProfileState extends State<UserProfile> {
                 );
               }
               // joined date
-              String joinedDate = state.user.dateJoined;
+              String joinedDate =
+                  state.user.dateJoined.isEmpty ? DateTime.now().toString() : state.user.dateJoined;
               // format dateJoined
               var _formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
               // conver dateJoined to DateTime

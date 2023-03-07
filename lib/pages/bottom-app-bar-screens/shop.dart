@@ -15,13 +15,13 @@ class ShopPage extends StatelessWidget {
         backgroundColor: primaryColor,
         // AppBar
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(150),
+          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.23),
           child: AppBar(
             backgroundColor: const Color.fromARGB(255, 26, 134, 223),
             elevation: 15,
             automaticallyImplyLeading: false,
             flexibleSpace: Padding(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
               child: Container(
                 height: 100,
                 decoration: const BoxDecoration(

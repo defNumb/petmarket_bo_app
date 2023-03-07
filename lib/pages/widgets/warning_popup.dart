@@ -42,14 +42,15 @@ class _WarningPopUpState extends State<WarningPopUp> {
             password: _passwordController.text,
           ),
         );
+    // pop from all pages
+    Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);
+    ;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Container(
           // 90% of the screen height

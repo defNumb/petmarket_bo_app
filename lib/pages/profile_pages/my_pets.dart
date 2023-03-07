@@ -75,7 +75,6 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
       ),
       body: BlocConsumer<PetListCubit, PetListState>(
         listener: (context, state) {
-          print(state.listStatus);
           if (state.listStatus == PetListStatus.error) {
             errorDialog(context, state.error);
           }
@@ -144,7 +143,7 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
                       child: Stack(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 6),
                             child: Container(
                                 decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 130, 189, 217),
@@ -156,57 +155,63 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
                                 width: MediaQuery.of(context).size.width),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 130, 0, 0),
+                            padding: EdgeInsets.fromLTRB(
+                                25, MediaQuery.of(context).size.height / 7.5, 0, 0),
                             child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 130, 189, 217),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(100),
-                                  ),
+                              decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 130, 189, 217),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(100),
                                 ),
-                                height: 60,
-                                width: 60),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(17, 132, 0, 0),
-                            child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Color.fromARGB(221, 7, 33, 75),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(100),
+                              ),
+                              height: 65,
+                              width: 65,
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromARGB(221, 199, 229, 219),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(100),
+                                    ),
                                   ),
-                                ),
-                                height: 56,
-                                width: 56),
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(25, 125, 8, 0),
-                                child: ClipOval(
-                                  child: Image.asset(
-                                    petDocument.icon,
-                                    width: 40,
-                                    height: 70,
-                                    fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      petDocument.icon,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(25, 145, 8, 0),
-                                child: Text(
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                50, MediaQuery.of(context).size.height / 5.5, 0, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
                                   petDocument.name,
                                   style: const TextStyle(
                                     fontFamily: fontType,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     color: fontColor,
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(150, 150, 0, 20),
-                                child: IconButton(
+                                //pet birthday
+                                Text(
+                                  petDocument.birthDay,
+                                  style: const TextStyle(
+                                    fontFamily: fontType,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: fontColor,
+                                  ),
+                                ),
+                                IconButton(
                                   color: Colors.white,
                                   onPressed: () => showDialog<String>(
                                     context: context,
@@ -234,9 +239,9 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
                                   icon: const Icon(
                                     Icons.delete_outline,
                                   ),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
