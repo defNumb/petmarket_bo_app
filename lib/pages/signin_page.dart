@@ -20,6 +20,13 @@ class _SigninPageState extends State<SigninPage> {
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   String? _email, _password;
   FocusNode myFocusNode = new FocusNode();
+  late bool _passwordVisible;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
 
   void _submit() {
     setState(() {
@@ -95,7 +102,8 @@ class _SigninPageState extends State<SigninPage> {
 
                           // Contraseña
                           TextFormField(
-                            obscureText: true,
+                            keyboardType: TextInputType.text,
+                            obscureText: !_passwordVisible,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -104,6 +112,15 @@ class _SigninPageState extends State<SigninPage> {
                               filled: true,
                               labelText: 'Contraseña',
                               prefixIcon: Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                    _passwordVisible ? Icons.visibility : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
                             ),
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {

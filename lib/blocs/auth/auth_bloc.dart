@@ -59,13 +59,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Create a delete account event
     on<DeleteAccountRequestedEvent>(
       (event, emit) async {
-        await authRepository.deleteUserAccount(event.password);
-        // emit new state
-        emit(
-          state.copyWith(
-            authStatus: AuthStatus.unauthenticated,
-            user: null,
-          ),
+        await authRepository.deleteUserAccount(event.password).then(
+          (value) {
+            // emit new state
+            emit(
+              state.copyWith(
+                authStatus: AuthStatus.unauthenticated,
+                user: null,
+              ),
+            );
+          },
         );
       },
     );

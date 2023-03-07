@@ -18,6 +18,13 @@ class _SignupPopupState extends State<SignupPopup> {
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   final _passwordController = TextEditingController();
   String? _name, _lastName, _email, _password;
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = false;
+  }
 
   void _submit() {
     setState(() {
@@ -74,7 +81,7 @@ class _SignupPopupState extends State<SignupPopup> {
                       ),
                       filled: true,
                       labelText: 'Nombre',
-                      prefix: Icon(Icons.account_box),
+                      prefixIcon: Icon(Icons.account_box),
                     ),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
@@ -100,7 +107,7 @@ class _SignupPopupState extends State<SignupPopup> {
                       filled: true,
                       fillColor: Colors.white70,
                       labelText: 'Apellido',
-                      prefix: Icon(Icons.account_box),
+                      prefixIcon: Icon(Icons.account_box),
                     ),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
@@ -127,7 +134,7 @@ class _SignupPopupState extends State<SignupPopup> {
                       filled: true,
                       labelText: 'Correo electrónico',
                       fillColor: Colors.white70,
-                      prefix: Icon(Icons.email),
+                      prefixIcon: Icon(Icons.email),
                     ),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
@@ -146,7 +153,7 @@ class _SignupPopupState extends State<SignupPopup> {
                   // Contraseña
                   TextFormField(
                     controller: _passwordController,
-                    obscureText: true,
+                    obscureText: !_obscureText,
                     decoration: InputDecoration(
                       fillColor: Colors.white70,
                       border: OutlineInputBorder(
@@ -154,7 +161,18 @@ class _SignupPopupState extends State<SignupPopup> {
                       ),
                       filled: true,
                       labelText: 'Contraseña',
-                      prefix: Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
                     ),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
@@ -172,7 +190,7 @@ class _SignupPopupState extends State<SignupPopup> {
                   SizedBox(height: 20.0),
                   // Confirmar contraseña
                   TextFormField(
-                    obscureText: true,
+                    obscureText: !_obscureText,
                     decoration: InputDecoration(
                       fillColor: Colors.white70,
                       border: OutlineInputBorder(

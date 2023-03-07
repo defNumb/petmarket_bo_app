@@ -21,7 +21,7 @@ class DiscoverPage extends StatelessWidget {
           elevation: 15,
           automaticallyImplyLeading: false,
           flexibleSpace: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Container(
               height: 150,
               decoration: const BoxDecoration(

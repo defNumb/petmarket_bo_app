@@ -16,8 +16,9 @@ class ProfileRepository {
       if (userDoc.exists) {
         final currentUser = User.fromDoc(userDoc);
         return currentUser;
+      } else {
+        return User.initialUser();
       }
-      throw 'User not found';
     } on FirebaseException catch (e) {
       throw CustomError(
         code: e.code,
@@ -28,7 +29,7 @@ class ProfileRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.getProfile',
       );
     }
   }
@@ -56,7 +57,7 @@ class ProfileRepository {
       throw CustomError(
         code: 'Exception',
         message: e.toString(),
-        plugin: 'flutter_error/server_error',
+        plugin: 'flutter_error/server_error.updateProfile',
       );
     }
   }

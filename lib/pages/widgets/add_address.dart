@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/add_address/add_address_cubit.dart';
+import '../../blocs/address_list/address_list_cubit.dart';
 import '../../constants/app_constants.dart';
 import '../../models/address_model.dart';
 import '../../utils/error_dialog.dart';
@@ -43,7 +44,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
     // add address to firebase
     context.read<AddAddressCubit>().addAddress(address);
-
+    // update address list
+    context.read<AddressListCubit>().updateAddressList();
     // todo update address list cubit
     Navigator.of(context).pop();
   }

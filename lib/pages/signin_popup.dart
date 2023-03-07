@@ -17,6 +17,13 @@ class _SigninPopupState extends State<SigninPopup> {
   AutovalidateMode _autoValidateMode = AutovalidateMode.disabled;
   String? _email, _password;
   FocusNode myFocusNode = new FocusNode();
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = false;
+  }
 
   void _submit() {
     setState(() {
@@ -89,7 +96,7 @@ class _SigninPopupState extends State<SigninPopup> {
                   SizedBox(height: 20.0),
                   // Contraseña
                   TextFormField(
-                    obscureText: true,
+                    obscureText: !_obscureText,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -98,6 +105,17 @@ class _SigninPopupState extends State<SigninPopup> {
                       filled: true,
                       labelText: 'Contraseña',
                       prefixIcon: Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility : Icons.visibility_off,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
                     ),
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {

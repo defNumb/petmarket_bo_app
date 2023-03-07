@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-
 import '../../models/address_model.dart';
 import '../../models/custom_error.dart';
 import '../../repositories/address_repository.dart';
