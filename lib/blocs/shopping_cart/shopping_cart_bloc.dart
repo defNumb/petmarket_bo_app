@@ -15,7 +15,7 @@ import '../auth/auth_state.dart';
 part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
 
-class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartState> {
+class ShoppingCartBloc extends Bloc<ShoppingCartBlocEvent, ShoppingCartState> {
   late final StreamSubscription cartSubscription;
   final ShoppingCartRepository cartRepository;
   final ProductRepository productRepository;
@@ -100,15 +100,15 @@ class ShoppingCartBloc extends HydratedBloc<ShoppingCartBlocEvent, ShoppingCartS
   }
 
   // This will be used once HydratedBloc is implemented
-  @override
-  ShoppingCartState? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    return null;
-  }
+  // @override
+  // ShoppingCartState? fromJson(Map<String, dynamic> json) {
+  //   // implement fromJson
+  //   return null;
+  // }
 
-  @override
-  Map<String, dynamic>? toJson(ShoppingCartState state) {
-    // TODO: implement toJson
-    return null;
-  }
+  // @override
+  // Map<String, dynamic>? toJson(ShoppingCartState state) {
+  //   // implement toJson
+  //   return null;
+  // }
 }

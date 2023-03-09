@@ -28,6 +28,7 @@ class AddFopState extends Equatable {
         cardExpirationDate: '',
         cardCcv: '',
         cardType: CardType.invalid,
+        isDefault: false,
       ),
     );
   }

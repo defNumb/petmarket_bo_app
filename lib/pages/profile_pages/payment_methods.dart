@@ -5,6 +5,7 @@ import 'package:petmarket_bo_app/utils/error_dialog.dart';
 import '../../blocs/add_fop/add_fop_cubit.dart';
 import '../../blocs/fop_list/fop_list_cubit.dart';
 import '../../constants/app_constants.dart';
+import '../../models/fop_model.dart';
 
 class PaymentMethodPage extends StatefulWidget {
   static String routeName = '/payment_methods';
@@ -68,17 +69,72 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
           return ListView.builder(
             itemCount: state.fopList.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  title: Text(state.fopList[index].cardName),
-                  // delete button
-                  trailing: IconButton(
-                    onPressed: () {
-                      BlocProvider.of<AddFopCubit>(context).deleteFop(state.fopList[index].id);
-                    },
-                    icon: const Icon(Icons.delete),
-                    color: Colors.red,
-                  ),
+              // container with round edges in the shape of a card with shadow
+              // and a row with the fop name and a delete button
+              // and display the digits obscured by * until the last 4 digits
+              return Container(
+                height: 235,
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.blue[800],
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50.0),
+                          child: Text(
+                            state.fopList[index].cardName,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Quicksand',
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            BlocProvider.of<AddFopCubit>(context)
+                                .deleteFop(state.fopList[index].id);
+                          },
+                          icon: const Icon(Icons.delete),
+                          iconSize: 30,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          '**** **** **** ${state.fopList[index].cardNumber.substring(state.fopList[index].cardNumber.length - 4)}',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Quicksand',
+                          ),
+                        ),
+                        // sized box
+                        const SizedBox(width: 10),
+                        getCardTypeIcon(
+                          state.fopList[index].cardType,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               );
             },
@@ -136,4 +192,46 @@ Widget noFormsOfPayment(context) {
       ),
     ],
   );
+}
+
+// method to get card type icon image from assets based on CardType enum
+Widget getCardTypeIcon(CardType cardType) {
+  switch (cardType) {
+    case CardType.visa:
+      return Image.asset(
+        'assets/images/visa.png',
+        width: 50,
+        height: 50,
+      );
+    case CardType.mastercard:
+      return Image.asset(
+        'assets/images/mastercard.png',
+        width: 50,
+        height: 50,
+      );
+    case CardType.amex:
+      return Image.asset(
+        'assets/images/american_express.png',
+        width: 50,
+        height: 50,
+      );
+    case CardType.discover:
+      return Image.asset(
+        'assets/images/discover.png',
+        width: 50,
+        height: 50,
+      );
+
+    case CardType.others:
+      return Image.asset(
+        'assets/images/unknown.png',
+        width: 50,
+        height: 50,
+      );
+    default:
+      return Placeholder(
+        fallbackHeight: 50,
+        fallbackWidth: 50,
+      );
+  }
 }

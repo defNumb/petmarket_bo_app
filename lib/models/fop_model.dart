@@ -14,6 +14,7 @@ class FormOfPayment extends Equatable {
   final String cardExpirationDate;
   final String cardCcv;
   final CardType cardType;
+  final bool isDefault;
 
   FormOfPayment({
     required this.id,
@@ -23,6 +24,7 @@ class FormOfPayment extends Equatable {
     required this.cardExpirationDate,
     required this.cardCcv,
     required this.cardType,
+    required this.isDefault,
   });
 
   // Factory constructor to retrieve information from firebase
@@ -37,9 +39,10 @@ class FormOfPayment extends Equatable {
       cardExpirationDate: fopDoc['cardExpirationDate'] ?? '',
       cardCcv: fopDoc['cardCcv'] ?? '',
       cardType: CardType.values.firstWhere(
-        (e) => e.toString().split('.').last == fopDoc['cardType'],
+        (e) => e.toString() == fopDoc['cardType'],
         orElse: () => CardType.invalid,
       ),
+      isDefault: fopDoc['isDefault'] ?? false,
     );
   }
 
@@ -66,11 +69,9 @@ class FormOfPayment extends Equatable {
       cardExpirationDate,
       cardCcv,
       cardType,
+      isDefault,
     ];
   }
-
-  @override
-  bool get stringify => true;
 
   FormOfPayment copyWith({
     String? id,
@@ -80,6 +81,7 @@ class FormOfPayment extends Equatable {
     String? cardExpirationDate,
     String? cardCcv,
     CardType? cardType,
+    bool? isDefault,
   }) {
     return FormOfPayment(
       id: id ?? this.id,
@@ -89,6 +91,7 @@ class FormOfPayment extends Equatable {
       cardExpirationDate: cardExpirationDate ?? this.cardExpirationDate,
       cardCcv: cardCcv ?? this.cardCcv,
       cardType: cardType ?? this.cardType,
+      isDefault: isDefault ?? this.isDefault,
     );
   }
 }

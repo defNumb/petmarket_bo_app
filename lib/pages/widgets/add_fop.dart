@@ -60,6 +60,7 @@ class _AddFopPageState extends State<AddFopPage> {
       cardExpirationDate: _fopExpDate ?? '',
       cardHolderName: _cardHolderName ?? '',
       cardType: cardType,
+      isDefault: false,
     );
 
     // add address to firebase
