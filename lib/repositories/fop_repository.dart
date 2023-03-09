@@ -78,6 +78,7 @@ class FopRepository {
           'cardExpirationDate': formOfPayment.cardExpirationDate,
           'cardCcv': formOfPayment.cardCcv,
           'cardType': formOfPayment.cardType.toString(),
+          'isDefault': formOfPayment.isDefault,
         },
       );
     } on FirebaseException catch (e) {
