@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:petmarket_bo_app/blocs/breed_provider/breed_provider_bloc.dart';
 import 'package:petmarket_bo_app/blocs/favorite_badge/favorite_badge_cubit.dart';
 import 'package:petmarket_bo_app/blocs/signup-in-switch/signup_in_switch_cubit.dart';
 import 'package:petmarket_bo_app/pages/widgets/add_fop.dart';
+import 'package:petmarket_bo_app/repositories/dog_api.dart';
 import 'package:petmarket_bo_app/repositories/favorite_repository.dart';
 import 'blocs/add_address/add_address_cubit.dart';
 import 'blocs/add_fop/add_fop_cubit.dart';
@@ -53,6 +55,7 @@ import 'pages/widgets/shop_widgets/dog_products.dart';
 import 'repositories/address_repository.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/brand_repository.dart';
+import 'repositories/cat_api.dart';
 import 'repositories/fop_repository.dart';
 import 'repositories/pet_repository.dart';
 import 'repositories/product_repository.dart';
@@ -131,6 +134,13 @@ class MyApp extends StatelessWidget {
           create: (context) => FopRepository(
             firebaseFirestore: FirebaseFirestore.instance,
           ),
+        ),
+        RepositoryProvider<DogApiRepository>(
+          create: (context) => DogApiRepository(),
+        ),
+        // cat repository
+        RepositoryProvider<CatApiRepository>(
+          create: (context) => CatApiRepository(),
         ),
       ],
       child: MultiBlocProvider(
@@ -243,6 +253,12 @@ class MyApp extends StatelessWidget {
           BlocProvider<FopListCubit>(
             create: (context) => FopListCubit(
               fopRepository: context.read<FopRepository>(),
+            ),
+          ),
+          BlocProvider<BreedProviderBloc>(
+            create: (context) => BreedProviderBloc(
+              catApiRepository: context.read<CatApiRepository>(),
+              dogApiRepository: context.read<DogApiRepository>(),
             ),
           ),
         ],

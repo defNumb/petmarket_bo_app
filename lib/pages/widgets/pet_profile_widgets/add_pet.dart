@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:petmarket_bo_app/utils/input_formatters.dart';
+import '../../../blocs/breed_provider/breed_provider_bloc.dart';
 import '../../../blocs/pet_list/pet_list_cubit.dart';
 import '../../../blocs/signup_pet/signup_pet_cubit.dart';
 import '../../../constants/app_constants.dart';
 import '../../../models/pet_model.dart';
 import '../../../utils/error_dialog.dart';
+import '../../../utils/text_utils.dart';
 
 class RegisterPetScreen extends StatefulWidget {
   static const String routeName = '/add_pet';
@@ -178,7 +181,27 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                           isDense: true,
                                           onChanged: (String? newValue) {
                                             setState(() {
+                                              if (newValue == 'Perro') {
+                                                context
+                                                    .read<BreedProviderBloc>()
+                                                    .add(BreedProviderSetBreedsEvent());
+                                                context
+                                                    .read<BreedProviderBloc>()
+                                                    .add(BreedProviderGetDogApiEvent());
+                                              } else if (newValue == 'Gato') {
+                                                context
+                                                    .read<BreedProviderBloc>()
+                                                    .add(BreedProviderSetBreedsEvent());
+                                                context
+                                                    .read<BreedProviderBloc>()
+                                                    .add(BreedProviderGetCatApiEvent());
+                                              } else {
+                                                context
+                                                    .read<BreedProviderBloc>()
+                                                    .add(BreedProviderSetBreedsEvent());
+                                              }
                                               _species = newValue;
+                                              _breed = null;
                                               state.didChange(newValue);
                                             });
                                           },
@@ -406,27 +429,29 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: FormField(
-                                  builder: (FormFieldState<String> state) {
+                                  builder: (FormFieldState<String> formFieldstate) {
                                     return InputDecorator(
                                       decoration: InputDecoration(
                                           errorStyle:
                                               TextStyle(color: Colors.redAccent, fontSize: 16.0),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(5.0))),
-                                      isEmpty: _species == 'Perro',
                                       child: DropdownButtonHideUnderline(
                                         child: DropdownButton<String>(
-                                          value: _species,
+                                          value: _breed,
                                           isExpanded: true,
                                           isDense: true,
                                           onChanged: (String? newValue) {
                                             setState(() {
-                                              _species = newValue;
-                                              state.didChange(newValue);
+                                              _breed = newValue;
+                                              formFieldstate.didChange(newValue);
                                             });
                                           },
-                                          items:
-                                              species.map<DropdownMenuItem<String>>((String value) {
+                                          items: context
+                                              .read<BreedProviderBloc>()
+                                              .state
+                                              .breeds
+                                              .map<DropdownMenuItem<String>>((String value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
                                               child: Text(value),
@@ -438,6 +463,7 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                   },
                                 ),
                               ),
+
                               // <---- FINAL RAZA DE LA MASCOTA
                               //
                               // RAZA ADICIONAL DE LA MASCOTA
@@ -450,19 +476,20 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                 ),
                               ),
                               Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white70,
+                                padding: const EdgeInsets.all(15),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    onSaved: (String? value) {
-                                      _breed2 = value;
-                                    },
-                                  )),
+                                    filled: true,
+                                    fillColor: Colors.white70,
+                                  ),
+                                  onSaved: (String? value) {
+                                    _breed2 = value;
+                                  },
+                                ),
+                              ),
                               // <---- FINAL RAZA ADICIONAL DE LA MASCOTA
                               //
                               // GENERO DE LA MASCOTA
@@ -508,6 +535,12 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(4),
+                                    WeightInputFormatter(),
+                                  ],
                                   autocorrect: false,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -545,6 +578,11 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: TextFormField(
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(8),
+                                    DateInputFormatter(),
+                                  ],
                                   autocorrect: false,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -554,11 +592,8 @@ class _RegisterPetScreenState extends State<RegisterPetScreen> {
                                     fillColor: Colors.white70,
                                     hintText: 'dd/mm/aaaa',
                                   ),
-                                  validator: (String? value) {
-                                    if (value == null || value.trim().isEmpty) {
-                                      return 'Por favor ingrese una fecha';
-                                    }
-                                    return null;
+                                  validator: (value) {
+                                    return TextUtils.validateDate(value);
                                   },
                                   keyboardType: TextInputType.datetime,
                                   onSaved: (value) {
