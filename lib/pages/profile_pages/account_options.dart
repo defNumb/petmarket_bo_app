@@ -2,9 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:petmarket_bo_app/pages/widgets/warning_popup.dart';
-
 import '../../blocs/profile/profile_cubit.dart';
+import '../../models/custom_error.dart';
 import '../../models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fbAuth;
+
+import '../../utils/error_dialog.dart';
 
 class AccountOptionsPage extends StatefulWidget {
   static String routeName = '/account_options';
@@ -37,7 +40,7 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
       id: BlocProvider.of<ProfileCubit>(context).state.user.id,
       name: _name ?? BlocProvider.of<ProfileCubit>(context).state.user.name,
       lastName: _lastName ?? BlocProvider.of<ProfileCubit>(context).state.user.lastName,
-      email: _email ?? BlocProvider.of<ProfileCubit>(context).state.user.email,
+      email: _email ?? fbAuth.FirebaseAuth.instance.currentUser!.email!,
       point: BlocProvider.of<ProfileCubit>(context).state.user.point,
       rank: BlocProvider.of<ProfileCubit>(context).state.user.rank,
       phoneNumber: _phoneNumber ?? BlocProvider.of<ProfileCubit>(context).state.user.phoneNumber,
@@ -52,13 +55,16 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
       postNotification: BlocProvider.of<ProfileCubit>(context).state.user.postNotification,
       isOnline: BlocProvider.of<ProfileCubit>(context).state.user.isOnline,
     );
+
     // update user info
     BlocProvider.of<ProfileCubit>(context).updateProfile(
       newUser.id,
       newUser.name,
       newUser.lastName,
       newUser.phoneNumber,
+      newUser.email,
     );
+
     // get user info
     BlocProvider.of<ProfileCubit>(context).getProfile(uid: newUser.id);
   }
@@ -185,6 +191,7 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
                                 color: Colors.grey[200],
                               ),
                               child: TextFormField(
+                                keyboardType: TextInputType.number,
                                 initialValue: state.user.phoneNumber,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
@@ -195,12 +202,6 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
                                   ),
                                   contentPadding: EdgeInsets.only(left: 15.0),
                                 ),
-                                validator: (String? value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Por favor ingrese su número de teléfono';
-                                  }
-                                  return null;
-                                },
                                 onSaved: (newValue) {
                                   _phoneNumber = newValue;
                                 },
@@ -219,6 +220,7 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
                                 color: Colors.grey[200],
                               ),
                               child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 initialValue: state.user.email,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
@@ -234,6 +236,9 @@ class _AccountOptionsPageState extends State<AccountOptionsPage> {
                                     return 'Por favor ingrese su correo electrónico';
                                   }
                                   return null;
+                                },
+                                onSaved: (newValue) {
+                                  _email = newValue;
                                 },
                               ),
                             ),

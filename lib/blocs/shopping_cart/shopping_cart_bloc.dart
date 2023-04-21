@@ -78,7 +78,10 @@ class ShoppingCartBloc extends Bloc<ShoppingCartBlocEvent, ShoppingCartState> {
         // remove the item value from the total
         double total = state.total - (product.price);
         // emit the new state
-        emit(state.copyWith(shoppingCart: cartItems, total: total));
+        emit(state.copyWith(
+          shoppingCart: cartItems,
+          total: total.abs(),
+        ));
       },
     );
 
@@ -94,7 +97,9 @@ class ShoppingCartBloc extends Bloc<ShoppingCartBlocEvent, ShoppingCartState> {
           total += product.price * item.quantity;
         }
         // emit the new state
-        emit(state.copyWith(total: total));
+        emit(state.copyWith(
+          total: total.abs(),
+        ));
       },
     );
   }

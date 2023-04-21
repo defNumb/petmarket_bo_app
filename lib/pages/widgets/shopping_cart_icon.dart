@@ -28,14 +28,16 @@ Widget shoppingCartIcon(BuildContext context) {
 
   return BlocBuilder<BadgesCubit, BadgesState>(
     builder: (context, state) {
-      return Badges.Badge(
-        badgeContent: Text(
-          state.badgeAmount.toString(),
-          style: TextStyle(color: Colors.white),
-        ),
-        child: BlocBuilder<AuthBloc, AuthState>(
-          builder: (context, state) {
-            return IconButton(
+      return BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          return Badges.Badge(
+            badgeContent: Text(
+              state.authStatus == AuthStatus.anonymous
+                  ? '0'
+                  : context.read<BadgesCubit>().state.badgeAmount.toString(),
+              style: TextStyle(color: Colors.white),
+            ),
+            child: IconButton(
               onPressed: () {
                 state.authStatus == AuthStatus.anonymous
                     ? _showDialog()
@@ -43,10 +45,10 @@ Widget shoppingCartIcon(BuildContext context) {
               },
               icon: const Icon(Icons.shopping_cart),
               iconSize: 30,
-            );
-          },
-        ),
-        position: Badges.BadgePosition.bottomEnd(bottom: 0, end: 0),
+            ),
+            position: Badges.BadgePosition.bottomEnd(bottom: 0, end: 0),
+          );
+        },
       );
     },
   );

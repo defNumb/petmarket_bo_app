@@ -97,6 +97,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<ProfileRepository>(
           create: (context) => ProfileRepository(
             firebaseFirestore: FirebaseFirestore.instance,
+            firebaseAuth: FirebaseAuth.instance,
           ),
         ),
         RepositoryProvider<PetRepository>(

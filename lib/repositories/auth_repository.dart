@@ -78,11 +78,17 @@ class AuthRepository {
         password: password,
       );
     } on fbAuth.FirebaseAuthException catch (e) {
-      throw CustomError(
-        code: e.code,
-        message: e.message!,
-        plugin: e.plugin,
-      );
+      if (e.code == 'user-not-found') {
+        throw CustomError(
+          code: e.code,
+          message: 'Usuario o Contraseña incorrecta!',
+        );
+      } else if (e.code == 'wrong-password') {
+        throw CustomError(
+          code: e.code,
+          message: 'Usuario o Contraseña incorrecta!',
+        );
+      }
     } catch (e) {
       throw CustomError(
         code: 'Exception',

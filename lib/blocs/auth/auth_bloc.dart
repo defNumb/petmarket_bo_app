@@ -21,7 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthStateChangedEvent>(
       (event, emit) async {
         if (event.user != null) {
-          print(event.user!.isAnonymous);
           // Check if the user is anonymous
           if (event.user!.isAnonymous) {
             emit(

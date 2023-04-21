@@ -266,9 +266,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     color: Colors.yellow,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
+                        backgroundColor: state.product.stock == 0 ? Colors.red : Colors.yellow,
                       ),
                       onPressed: () {
+                        if (state.product.stock == 0) {
+                          return null;
+                        }
                         CartItem cartItem = CartItem(
                           id: state.product.id,
                           name: state.product.name,
@@ -283,9 +286,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
-                            "Agregar al carrito",
+                            state.product.stock == 0 ? "AGOTADO" : "Agregar al carrito",
                             style: TextStyle(fontSize: 16, color: Colors.black87),
                           ),
                           Icon(
