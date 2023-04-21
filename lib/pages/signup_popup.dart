@@ -19,6 +19,7 @@ class _SignupPopupState extends State<SignupPopup> {
   final _passwordController = TextEditingController();
   String? _name, _lastName, _email, _password;
   late bool _obscureText;
+  // texts
 
   @override
   void initState() {
