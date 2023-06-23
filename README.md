@@ -1,16 +1,41 @@
 # petmarket_bo_app
 
-A new Flutter project.
+This project was created for Pet Market Bolivia.
+Lead Developer -  Sam Espinoza
+Web/Data admin - Sergio Foianini
+Designer - Claudia Alejandra
 
-## Getting Started
+# Pet Market App
 
-This project is a starting point for a Flutter application.
+La aplicación Pet Market es una plataforma para comprar y vender productos para tus mascotas. Esta aplicación utiliza el patrón de diseño Bloc para administrar el estado de la aplicación y Firebase como su base de datos en la nube.
 
-A few resources to get you started if this is your first Flutter project:
+## Características principales
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Registro y autenticación de usuarios.
+- Publicación y búsqueda de anuncios de mascotas en venta.
+- Mensajería integrada para facilitar la comunicación entre compradores y vendedores.
+- Sistema de valoración y reseñas de vendedores.
+- Búsqueda y filtrado avanzado de anuncios.
+- Interfaz de usuario intuitiva y atractiva.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tecnologías utilizadas
+
+- Flutter: un framework de desarrollo de aplicaciones multiplataforma.
+- Dart: el lenguaje de programación utilizado por Flutter.
+- Bloc: un patrón de diseño para administrar el estado de la aplicación.
+- Firebase: una plataforma de desarrollo de aplicaciones móviles en la nube que proporciona servicios como autenticación de usuarios y una base de datos en tiempo real.
+
+## Capturas de pantalla
+
+// TODO: agregar capturas de pantallas
+
+## Instalación
+
+1. Asegúrate de tener Flutter instalado. Si no lo tienes, puedes encontrar instrucciones de instalación en la documentación oficial de Flutter: [https://flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install)
+
+2. Clona este repositorio en tu máquina local:
+
+```shell
+git clone https://github.com/defNumb/petmarket_bo_app.git
+
+
