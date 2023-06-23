@@ -35,7 +35,16 @@ La aplicación Pet Market es una plataforma para comprar y vender productos para
 
 2. Clona este repositorio en tu máquina local:
 
-```shell
-git clone https://github.com/defNumb/petmarket_bo_app.git
+``` git clone https://github.com/defNumb/petmarket_bo_app.git ```
 
+3. Accede al directorio del proyecto:
+``` cd pet-market-app ```
 
+4 . Ejecuta el siguiente comando para obtener las dependencias del proyecto
+``` flutter pub get ```
+
+5. Configura el projecto en Firebase
+
+## Licencia
+
+MIT Licence
