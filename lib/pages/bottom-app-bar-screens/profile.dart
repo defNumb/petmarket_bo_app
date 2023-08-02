@@ -103,14 +103,16 @@ class _UserProfileState extends State<UserProfile> {
                 );
               }
               // joined date
-              String joinedDate =
-                  state.user.dateJoined.isEmpty ? DateTime.now().toString() : state.user.dateJoined;
+              String joinedDate = state.user.dateJoined.isEmpty
+                  ? DateTime.now().toString()
+                  : state.user.dateJoined;
               // format dateJoined
               var _formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
               // conver dateJoined to DateTime
               final DateTime joined = _formatter.parse(joinedDate);
               // format joined date to YYYY-MM-DD
-              final String joinedFormated = DateFormat('yyyy-MM-dd').format(joined);
+              final String joinedFormated =
+                  DateFormat('yyyy-MM-dd').format(joined);
 
               return SafeArea(
                 child: SingleChildScrollView(
@@ -151,7 +153,8 @@ class _UserProfileState extends State<UserProfile> {
                       ),
 
                       // Divider
-                      const Divider(height: 0, thickness: 2, color: Colors.white60),
+                      const Divider(
+                          height: 0, thickness: 2, color: Colors.white60),
 
                       // Llamanos Banner
                       Container(
@@ -178,7 +181,8 @@ class _UserProfileState extends State<UserProfile> {
                               children: [
                                 // Llamanos
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(70, 10, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(70, 10, 0, 0),
                                   child: InkWell(
                                     onTap: () {
                                       _launchCaller();
@@ -187,8 +191,10 @@ class _UserProfileState extends State<UserProfile> {
                                       height: 50,
                                       width: 110,
                                       decoration: BoxDecoration(
-                                        color: const Color.fromARGB(255, 46, 107, 156),
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        color: const Color.fromARGB(
+                                            255, 46, 107, 156),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         border: Border.all(
                                           color: Colors.white,
                                         ),
@@ -196,8 +202,10 @@ class _UserProfileState extends State<UserProfile> {
                                       child: Row(
                                         children: const [
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(7, 0, 0, 0),
-                                            child: Icon(Icons.phone, color: Colors.white),
+                                            padding:
+                                                EdgeInsets.fromLTRB(7, 0, 0, 0),
+                                            child: Icon(Icons.phone,
+                                                color: Colors.white),
                                           ),
                                           Center(
                                               child: Text(
@@ -215,15 +223,18 @@ class _UserProfileState extends State<UserProfile> {
 
                                 // Envianos un mensaje
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(50, 10, 0, 0),
                                   child: InkWell(
                                     onTap: () {},
                                     child: Container(
                                       height: 50,
                                       width: 110,
                                       decoration: BoxDecoration(
-                                        color: const Color.fromARGB(255, 46, 107, 156),
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        color: const Color.fromARGB(
+                                            255, 46, 107, 156),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         border: Border.all(
                                           color: Colors.white,
                                         ),
@@ -231,8 +242,10 @@ class _UserProfileState extends State<UserProfile> {
                                       child: Row(
                                         children: const [
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                                            child: Icon(Icons.message, color: Colors.white),
+                                            padding: EdgeInsets.fromLTRB(
+                                                20, 0, 0, 0),
+                                            child: Icon(Icons.message,
+                                                color: Colors.white),
                                           ),
                                           Center(
                                               child: Text(
@@ -276,7 +289,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Mis mascotas
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(MyPetsScreen.routeName);
+                          Navigator.of(context)
+                              .pushNamed(MyPetsScreen.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -317,7 +331,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Historial de Compras
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(PurchaseHistory.routeName);
+                          Navigator.of(context)
+                              .pushNamed(PurchaseHistory.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -399,7 +414,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Metodos de Pago
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(PaymentMethodPage.routeName);
+                          Navigator.of(context)
+                              .pushNamed(PaymentMethodPage.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -440,7 +456,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Direcciones
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(MyAddressPage.routeName);
+                          Navigator.of(context)
+                              .pushNamed(MyAddressPage.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -498,7 +515,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Account Settings
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(AccountOptionsPage.routeName);
+                          Navigator.of(context)
+                              .pushNamed(AccountOptionsPage.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -539,7 +557,8 @@ class _UserProfileState extends State<UserProfile> {
                       // Notifications
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed(NotificationOptionsPage.routeName);
+                          Navigator.of(context)
+                              .pushNamed(NotificationOptionsPage.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 5),
@@ -726,7 +745,9 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            context.read<AuthBloc>().add(SignoutRequestedEvent());
+                            context
+                                .read<AuthBloc>()
+                                .add(SignoutRequestedEvent());
                           },
                           child: const Text(
                             'Cerrar sesión',
