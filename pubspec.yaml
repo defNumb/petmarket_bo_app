@@ -69,7 +69,7 @@ flutter:
     - family: Marhey
       fonts:
         - asset: assets/fonts/Marhey.ttf
-        - family: Renogare
+    - family: Renogare
       fonts:
         - asset: assets/fonts/Renogare-Regular.otf
     - family: MontBlanc
