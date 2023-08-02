@@ -73,8 +73,9 @@ void main() async {
   // Setting up HydratedBloc
   // This will help store information in the device
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory:
-        kIsWeb ? HydratedStorage.webStorageDirectory : await getApplicationDocumentsDirectory(),
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getApplicationDocumentsDirectory(),
   );
 
   runApp(const MyApp());
@@ -210,7 +211,8 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<FilteredProductsCubit>(
             create: (context) => FilteredProductsCubit(
-              initialProducts: context.read<ProductListCubit>().state.productList,
+              initialProducts:
+                  context.read<ProductListCubit>().state.productList,
             ),
           ),
           BlocProvider<BrandListCubit>(
@@ -244,7 +246,6 @@ class MyApp extends StatelessWidget {
               addressRepository: context.read<AddressRepository>(),
             ),
           ),
-          //add fop cubit
           BlocProvider<AddFopCubit>(
             create: (context) => AddFopCubit(
               fopRepository: context.read<FopRepository>(),
@@ -263,7 +264,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-          title: 'Pet Market App',
+          title: 'Pet Market Bolivia App',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
@@ -282,7 +283,8 @@ class MyApp extends StatelessWidget {
             MyAddressPage.routeName: (context) => MyAddressPage(),
             PaymentMethodPage.routeName: (context) => PaymentMethodPage(),
             AccountOptionsPage.routeName: (context) => AccountOptionsPage(),
-            NotificationOptionsPage.routeName: (context) => NotificationOptionsPage(),
+            NotificationOptionsPage.routeName: (context) =>
+                NotificationOptionsPage(),
             DogProducts.routeName: (context) => DogProducts(),
             CatProducts.routeName: (context) => CatProducts(),
             ShopPage.routeName: (context) => ShopPage(),

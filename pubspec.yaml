@@ -29,6 +29,7 @@ dependencies:
   favorite_button: ^0.0.4
   envied: ^0.3.0
   http: ^0.13.5
+  intl: ^0.18.1
 
 flutter_native_splash:
   color: "#428bca"
@@ -68,6 +69,22 @@ flutter:
     - family: Marhey
       fonts:
         - asset: assets/fonts/Marhey.ttf
-  #
+        - family: Renogare
+      fonts:
+        - asset: assets/fonts/Renogare-Regular.otf
+    - family: MontBlanc
+      fonts:
+        - asset: assets/fonts/MontBlanc-Trial-Regular.otf 
+        - asset: assets/fonts/MontBlanc-Trial-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/MontBlanc-Trial-Light.otf
+          weight: 300
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.otf
+        - asset: assets/fonts/Inter-Light.otf
+          weight: 300
+        - asset: assets/fonts/Inter-Bold.otf
+          weight: 600
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
