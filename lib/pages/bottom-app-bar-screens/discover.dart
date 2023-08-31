@@ -17,7 +17,7 @@ class DiscoverPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(150),
         child: AppBar(
-          backgroundColor: const Color.fromARGB(255, 26, 134, 223),
+          backgroundColor: Colors.white,
           elevation: 15,
           automaticallyImplyLeading: false,
           flexibleSpace: Padding(
@@ -26,7 +26,7 @@ class DiscoverPage extends StatelessWidget {
               height: 150,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage('assets/images/petmarketlogo.png'),
+                image: AssetImage('assets/images/logo_petsupply.png'),
               )),
             ),
           ),
