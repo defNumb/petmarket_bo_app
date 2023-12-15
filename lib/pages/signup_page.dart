@@ -183,7 +183,9 @@ class _SignupPageState extends State<SignupPage> {
                           prefixIcon: Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscureText ? Icons.visibility : Icons.visibility_off,
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                             ),
                             onPressed: () {
                               setState(() {
@@ -227,7 +229,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       SizedBox(height: 50.0),
                       InkWell(
-                        onTap: state.signupStatus == SignupStatus.submitting ? null : _submit,
+                        onTap: state.signupStatus == SignupStatus.submitting
+                            ? null
+                            : _submit,
                         child: Column(
                           children: [
                             Ink.image(
@@ -254,9 +258,7 @@ class _SignupPageState extends State<SignupPage> {
                       TextButton(
                         onPressed: state.signupStatus == SignupStatus.submitting
                             ? null
-                            : () {
-                                Navigator.of(context).pop();
-                              },
+                            : () => Navigator.of(context).pop(),
                         style: TextButton.styleFrom(
                           foregroundColor: Color.fromARGB(255, 211, 189, 146),
                           textStyle: TextStyle(
